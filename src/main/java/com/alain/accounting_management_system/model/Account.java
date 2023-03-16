@@ -10,7 +10,7 @@ import orm.database.connection.DatabaseConnection;
 public class Account extends Relation<Account> {
 
     @PrimaryKey(column = @Column(name = "id"), prefix = "ACC", length = 7, sequence = "account_seq")
-    private String account_id;
+    private String accountID;
 
     @Column
     private String email;
@@ -24,8 +24,8 @@ public class Account extends Relation<Account> {
     }
 
     // setters
-    public void setAccount_id(String account_id) {
-        this.account_id = account_id;
+    public void setAccountID(String account_id) {
+        this.accountID = account_id;
     }
 
     public void setEmail(String email) {
@@ -37,8 +37,8 @@ public class Account extends Relation<Account> {
     }
 
     // getters
-    public String getAccount_id() {
-        return account_id;
+    public String getAccountID() {
+        return accountID;
     }
 
     public String getEmail() {

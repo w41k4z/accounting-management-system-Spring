@@ -1,5 +1,6 @@
 CREATE DATABASE accounting_management_system OWNER walker;
 
+CREATE SEQUENCE currency_seq;
 CREATE TABLE currency (
     id VARCHAR(5) PRIMARY KEY,
     label VARCHAR(3) NOT NULL UNIQUE
@@ -12,6 +13,7 @@ CREATE TABLE account (
     password VARCHAR(16) NOT NULL
 );
 
+CREATE SEQUENCE society_seq;
 CREATE TABLE society (
     id VARCHAR(8) PRIMARY KEY,
     name VARCHAR(25) NOT NULL,
@@ -25,14 +27,16 @@ CREATE TABLE society (
     status VARCHAR(25) NOT NULL, 
     stdtacpd DATE NOT NULL, -- start date of accounting period
     accounting_currency VARCHAR(5) REFERENCES currency(id),
-    equivalent_currency VARCHAR(7) REFERENCES society_equivalent_currency(id),
+    equi_curr_id VARCHAR(7) REFERENCES society_equivalent_currency(id),
 );
 
+CREATE SEQUENCE soc_equi_curr_seq;
 CREATE TABLE society_equivalent_currency (
     id VARCHAR(6) PRIMARY KEY,
     society_id VARCHAR(8) REFERENCES society(id)
 );
 
+CREATE SEQUENCE equi_curr_det_seq;
 CREATE TABLE equivalent_currency_detail (
     id VARCHAR(7) PRIMARY KEY,
     soc_equi_curr_id VARCHAR(6) REFERENCES society_equivalent_currency(id),

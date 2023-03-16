@@ -12,8 +12,8 @@ public class ChartOfAccount extends Relation<ChartOfAccount> {
 
     private final static int ACCOUNT_NUMBER_LENGTH = 5;
 
-    @PrimaryKey(column = @Column(name = "account_number"))
-    private String accountNumber;
+    @PrimaryKey(column = @Column(name = "id"))
+    private String accountNumberID;
 
     @Column(name = "society_id")
     private String societyID;
