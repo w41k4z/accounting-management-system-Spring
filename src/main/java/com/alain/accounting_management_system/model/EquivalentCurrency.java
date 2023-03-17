@@ -31,7 +31,7 @@ public class EquivalentCurrency extends Relation<EquivalentCurrency> {
         this.societyID = societyID;
     }
 
-    public void setEquivalentCurrencyDetails(EquivalentCurrencyDetail[] equivalentCurrencyDetails) {
+    private void setEquivalentCurrencyDetails(EquivalentCurrencyDetail[] equivalentCurrencyDetails) {
         this.equivalentCurrencyDetails = equivalentCurrencyDetails;
     }
 
@@ -49,7 +49,7 @@ public class EquivalentCurrency extends Relation<EquivalentCurrency> {
     }
 
     // methods
-    public void getEquivalentCurrencyDetails(DatabaseConnection connection) throws Exception {
+    private void getEquivalentCurrencyDetails(DatabaseConnection connection) throws Exception {
         EquivalentCurrencyDetail[] equivalentCurrencyDetails = new EquivalentCurrencyDetail().findAll(connection,
                 "WHERE soc_equi_curr_id = '" + this.getEquivalentCurrencyID() + "'");
         this.setEquivalentCurrencyDetails(equivalentCurrencyDetails);
@@ -81,8 +81,8 @@ public class EquivalentCurrency extends Relation<EquivalentCurrency> {
     }
 
     @Override
-    public EquivalentCurrency findByPrimaryKey(DatabaseConnection connection, String spec) throws Exception {
-        EquivalentCurrency equivalentCurrency = super.findByPrimaryKey(connection, spec);
+    public EquivalentCurrency findByPrimaryKey(DatabaseConnection connection, String pk) throws Exception {
+        EquivalentCurrency equivalentCurrency = super.findByPrimaryKey(connection, pk);
         equivalentCurrency.getEquivalentCurrencyDetails(connection);
         return equivalentCurrency;
     }

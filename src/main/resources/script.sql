@@ -26,14 +26,13 @@ CREATE TABLE society (
     crgn VARCHAR(25) NOT NULL, -- commercial register number
     status VARCHAR(25) NOT NULL, 
     stdtacpd DATE NOT NULL, -- start date of accounting period
-    accounting_currency VARCHAR(5) REFERENCES currency(id),
-    equi_curr_id VARCHAR(7) REFERENCES society_equivalent_currency(id),
+    accounting_currency VARCHAR(5) REFERENCES currency(id)
 );
 
 CREATE SEQUENCE soc_equi_curr_seq;
 CREATE TABLE society_equivalent_currency (
     id VARCHAR(6) PRIMARY KEY,
-    society_id VARCHAR(8) REFERENCES society(id)
+    society_id VARCHAR(8) REFERENCES society(id) UNIQUE
 );
 
 CREATE SEQUENCE equi_curr_det_seq;
@@ -44,13 +43,15 @@ CREATE TABLE equivalent_currency_detail (
     value REAL NOT NULL
 );
 
+CREATE SEQUENCE society_account_seq;
 CREATE TABLE society_account (
     id VARCHAR(8) PRIMARY KEY,
-    account_id VARCHAR(7) REFERENCES account(account_id),
-    society_id VARCHAR(8) REFERENCES society(society_id)
+    account_id VARCHAR(7) REFERENCES account(id),
+    society_id VARCHAR(8) REFERENCES society(id)
 );
 
 -- chart of account --
+CREATE SEQUENCE chart_of_account_seq;
 CREATE TABLE chart_of_account (
     id VARCHAR(8) PRIMARY KEY,
     account_number VARCHAR(5) NOT NULL, -- is unique for each society
@@ -58,6 +59,7 @@ CREATE TABLE chart_of_account (
     entitled VARCHAR(50)
 );
 
+CREATE SEQUENCE third_party_chart_of_account_seq;
 CREATE TABLE third_party_chart_of_account (
     thd_pt_chrt_acc_id VARCHAR(8) PRIMARY KEY,
     chrt_acc_id VARCHAR(8) REFERENCES chart_of_account(id),

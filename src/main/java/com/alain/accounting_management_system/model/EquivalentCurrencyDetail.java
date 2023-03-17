@@ -18,10 +18,10 @@ public class EquivalentCurrencyDetail extends Relation<EquivalentCurrencyDetail>
     @Column(name = "currency_id")
     private String currencyID;
 
+    private Currency currency;
+
     @Column
     private Double value;
-
-    private Currency currency;
 
     // constructor
     public EquivalentCurrencyDetail() throws Exception {
@@ -40,12 +40,12 @@ public class EquivalentCurrencyDetail extends Relation<EquivalentCurrencyDetail>
         this.currencyID = currencyID;
     }
 
-    public void setValue(Double value) {
-        this.value = value;
+    private void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setValue(Double value) {
+        this.value = value;
     }
 
     // getters
@@ -61,18 +61,17 @@ public class EquivalentCurrencyDetail extends Relation<EquivalentCurrencyDetail>
         return this.currencyID;
     }
 
-    public Double getValue() {
-        return this.value;
-    }
-
     public Currency getCurrency() {
         return this.currency;
     }
 
+    public Double getValue() {
+        return this.value;
+    }
+
     // methods
-    public void getCurrency(DatabaseConnection connection) throws Exception {
-        Currency currency = new Currency().findByPrimaryKey(connection,
-                "WHERE currency_id = '" + this.getCurrencyID() + "'");
+    private void getCurrency(DatabaseConnection connection) throws Exception {
+        Currency currency = new Currency().findByPrimaryKey(connection, this.getCurrencyID());
         this.setCurrency(currency);
     }
 
@@ -102,8 +101,8 @@ public class EquivalentCurrencyDetail extends Relation<EquivalentCurrencyDetail>
     }
 
     @Override
-    public EquivalentCurrencyDetail findByPrimaryKey(DatabaseConnection connection, String spec) throws Exception {
-        EquivalentCurrencyDetail equivalentCurrencyDetail = super.findByPrimaryKey(connection, spec);
+    public EquivalentCurrencyDetail findByPrimaryKey(DatabaseConnection connection, String pk) throws Exception {
+        EquivalentCurrencyDetail equivalentCurrencyDetail = super.findByPrimaryKey(connection, pk);
         equivalentCurrencyDetail.getCurrency(connection);
         return equivalentCurrencyDetail;
     }

@@ -1,15 +1,14 @@
 package com.alain.accounting_management_system.model;
 
-import orm.annotation.Table;
-import orm.annotation.PrimaryKey;
-
 import java.sql.Date;
 
+import orm.annotation.Table;
+import orm.annotation.PrimaryKey;
 import orm.annotation.Column;
 import orm.database.connection.DatabaseConnection;
 import orm.database.object.relation.Relation;
 
-@Table(columnCount = 13)
+@Table(columnCount = 12)
 public class Society extends Relation<Society> {
 
     @PrimaryKey(column = @Column(name = "id"), prefix = "SOC", length = 8, sequence = "society_seq")
@@ -49,9 +48,6 @@ public class Society extends Relation<Society> {
     private String accountingCurrency;
 
     private Currency currency;
-
-    @Column(name = "equi_curr_id")
-    private String equivalentCurrencyID;
 
     private EquivalentCurrency equivalentCurrency;
 
@@ -109,15 +105,11 @@ public class Society extends Relation<Society> {
         this.accountingCurrency = accountingCurrency;
     }
 
-    public void setCurrency(Currency currency) {
+    private void setCurrency(Currency currency) {
         this.currency = currency;
     }
 
-    public void setEquivalentCurrencyID(String equivalentCurrencyID) {
-        this.equivalentCurrencyID = equivalentCurrencyID;
-    }
-
-    public void setEquivalentCurrency(EquivalentCurrency equivalentCurrency) {
+    private void setEquivalentCurrency(EquivalentCurrency equivalentCurrency) {
         this.equivalentCurrency = equivalentCurrency;
     }
 
@@ -174,24 +166,19 @@ public class Society extends Relation<Society> {
         return this.currency;
     }
 
-    public String getEquivalentCurrencyID() {
-        return this.equivalentCurrencyID;
-    }
-
     public EquivalentCurrency getEquivalentCurrency() {
         return this.equivalentCurrency;
     }
 
     // methods
-    public void getCurrency(DatabaseConnection connection) throws Exception {
-        Currency currency = new Currency().findByPrimaryKey(connection,
-                "WHERE accounting_currency = '" + this.getAccountingCurrency() + "'");
+    private void getCurrency(DatabaseConnection connection) throws Exception {
+        Currency currency = new Currency().findByPrimaryKey(connection, this.getAccountingCurrency());
         this.setCurrency(currency);
     }
 
-    public void getEquivalentCurrency(DatabaseConnection connection) throws Exception {
-        EquivalentCurrency equivalentCurrency = new EquivalentCurrency().findByPrimaryKey(connection,
-                "WHERE equi_curr_id = '" + this.getEquivalentCurrencyID() + "'");
+    private void getEquivalentCurrency(DatabaseConnection connection) throws Exception {
+        EquivalentCurrency equivalentCurrency = new EquivalentCurrency().findAll(connection,
+                "WHERE society_id = '" + this.getSocietyID() + "'")[0];
         this.setEquivalentCurrency(equivalentCurrency);
     }
 
@@ -224,8 +211,8 @@ public class Society extends Relation<Society> {
     }
 
     @Override
-    public Society findByPrimaryKey(DatabaseConnection connection, String spec) throws Exception {
-        Society society = super.findByPrimaryKey(connection, spec);
+    public Society findByPrimaryKey(DatabaseConnection connection, String pk) throws Exception {
+        Society society = super.findByPrimaryKey(connection, pk);
         society.getCurrency(connection);
         society.getEquivalentCurrency(connection);
         return society;

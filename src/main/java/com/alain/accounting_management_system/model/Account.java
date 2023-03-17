@@ -18,6 +18,8 @@ public class Account extends Relation<Account> {
     @Column
     private String password;
 
+    private SocietyAccount[] societyAccounts;
+
     // constructor
     public Account() throws Exception {
         super();
@@ -36,6 +38,10 @@ public class Account extends Relation<Account> {
         this.password = password;
     }
 
+    private void setSocietyAccounts(SocietyAccount[] societyAccounts) {
+        this.societyAccounts = societyAccounts;
+    }
+
     // getters
     public String getAccountID() {
         return accountID;
@@ -49,7 +55,49 @@ public class Account extends Relation<Account> {
         return this.password;
     }
 
+    public SocietyAccount[] getSocietyAccounts() {
+        return this.societyAccounts;
+    }
+
     // method
+    private void getSocietyAccounts(DatabaseConnection connection) throws Exception {
+        SocietyAccount[] societyAccounts = new SocietyAccount().findAll(connection,
+                "WHERE account_id='" + this.getAccountID() + "'");
+        this.setSocietyAccounts(societyAccounts);
+    }
+
+    @Override
+    public Account[] findAll(DatabaseConnection connection) throws Exception {
+        Account[] accounts = super.findAll(connection);
+        for (Account account : accounts) {
+            account.getSocietyAccounts(connection);
+        }
+        return accounts;
+    }
+
+    @Override
+    public Account[] findAll(DatabaseConnection connection, String spec) throws Exception {
+        Account[] accounts = super.findAll(connection, spec);
+        for (Account account : accounts) {
+            account.getSocietyAccounts(connection);
+        }
+        return accounts;
+    }
+
+    @Override
+    public Account findByPrimaryKey(DatabaseConnection connection) throws Exception {
+        Account account = super.findByPrimaryKey(connection);
+        account.getSocietyAccounts(connection);
+        return account;
+    }
+
+    @Override
+    public Account findByPrimaryKey(DatabaseConnection connection, String pk) throws Exception {
+        Account account = super.findByPrimaryKey(connection, pk);
+        account.getSocietyAccounts(connection);
+        return account;
+    }
+
     public static Account authenticate(DatabaseConnection connection, String email, String password) throws Exception {
         String spec = "WHERE email='" + email + "' AND password='" + password + "'";
         return new Account().findAll(connection, spec)[0];
