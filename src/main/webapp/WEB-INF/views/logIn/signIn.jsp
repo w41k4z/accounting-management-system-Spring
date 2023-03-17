@@ -38,11 +38,6 @@
                             <label>Password</label>
                             <input type="password" class="form-control" placeholder="Password" name="password">
                         </div>
-                        <div class="checkbox">
-                            <label class="pull-right">
-                                <a href="#">Forgotten Password?</a>
-                            </label>
-                        </div>
                         <button type="submit" class="btn btn-success btn-flat">Sign in</button>
                         <div class="register-link mt-5 text-center">
                             <p>Don't have account ? <a href="/app/account/register"> Sign Up Here</a></p>

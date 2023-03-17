@@ -42,7 +42,14 @@
 			<artifactId>orm</artifactId>
 			<version>1.0.0</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/orm.jar</systemPath>
+			<systemPath>${project.basedir}/lib/orm-1.0.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.alain</groupId>
+			<artifactId>postgres</artifactId>
+			<version>42.4.3</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/postgresql-42.4.3.jar</systemPath>
 		</dependency>
 	</dependencies>
 

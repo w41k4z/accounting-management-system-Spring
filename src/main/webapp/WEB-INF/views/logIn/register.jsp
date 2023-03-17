@@ -30,7 +30,7 @@
             <div class="login-content">
                 <div class="login-logo">
                     <a href="index.html">
-                        <img class="align-content" src="images/logo.png" alt="">
+                        <img class="align-content" src="/static/images/logo.png" alt="">
                     </a>
                 </div>
                 <div class="login-form">
@@ -53,16 +53,8 @@
                             </label>
                         </div>
                         <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
-                        <div class="social-login-content">
-                            <div class="social-button">
-                                <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i
-                                        class="ti-facebook"></i>Register with facebook</button>
-                                <button type="button" class="btn social twitter btn-flat btn-addon mt-2"><i
-                                        class="ti-twitter"></i>Register with twitter</button>
-                            </div>
-                        </div>
-                        <div class="register-link m-t-15 text-center">
-                            <p>Already have account ? <a href="#"> Sign in</a></p>
+                        <div class="register-link m-t-15 mt-3 text-center">
+                            <p>Already have account ? <a href="/app/account/login"> Sign in</a></p>
                         </div>
                     </form>
                 </div>

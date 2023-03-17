@@ -39,9 +39,9 @@ public class AccountController {
         return "logIn/register";
     }
 
-    @PostMapping("/create_account")
-    public String createAccount() {
-        return "logIn/register";
+    @GetMapping("/home-page")
+    public String home() {
+        return "app/home";
     }
 
     @GetMapping("/error")
