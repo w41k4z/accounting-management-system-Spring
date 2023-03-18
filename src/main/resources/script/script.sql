@@ -46,7 +46,8 @@ CREATE TABLE equivalent_currency_detail (
 CREATE TABLE society_account (
     id VARCHAR(8) PRIMARY KEY,
     account_id VARCHAR(7) REFERENCES account(id),
-    society_id VARCHAR(8) REFERENCES society(id)
+    society_id VARCHAR(8) REFERENCES society(id),
+    password VARCHAR(16) NOT NULL
 );
 CREATE TABLE chart_of_account (
     id VARCHAR(8) PRIMARY KEY,

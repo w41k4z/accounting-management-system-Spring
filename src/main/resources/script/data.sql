@@ -34,6 +34,5 @@ insert into equivalent_currency_detail values
 
 
 insert into society_account values
-('SAC00001', 'ACC0001', 'SOC0001');
+('SAC00001', 'ACC0001', 'SOC0001', 'society');
 
-insert into chart_of_account values

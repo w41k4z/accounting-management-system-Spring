@@ -22,6 +22,9 @@ public class SocietyAccount extends Relation<SocietyAccount> {
 
     private Society society;
 
+    @Column
+    private String password;
+
     // constructor
     public SocietyAccount() throws Exception {
         super();
@@ -48,6 +51,10 @@ public class SocietyAccount extends Relation<SocietyAccount> {
         this.society = society;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     // getters
     public String getSocietyAccountID() {
         return societyAccountID;
@@ -67,6 +74,10 @@ public class SocietyAccount extends Relation<SocietyAccount> {
 
     public Society getSociety() {
         return this.society;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     // methods
