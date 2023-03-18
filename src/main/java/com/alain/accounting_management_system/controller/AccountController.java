@@ -34,6 +34,20 @@ public class AccountController {
         return result;
     }
 
+    @PostMapping("/check-email")
+    @ResponseBody
+    public String checkEmail(@RequestParam String email) {
+        DatabaseConnection connection = new AppDBCon();
+        String result = "";
+        try {
+            Account[] accounts = new Account().findAll(connection, "WHERE email = '" + email + "'");
+            result = accounts.length > 0 ? "found" : null;
+        } catch (Exception e) {
+            result = e.getMessage();
+        }
+        return result;
+    }
+
     @GetMapping("/register")
     public String register() {
         return "logIn/register";

@@ -34,7 +34,7 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form>
+                    <form id="form" method="POST">
                         <div class="form-group">
                             <label>User Name</label>
                             <input type="email" class="form-control" placeholder="User Name">
@@ -67,6 +67,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="/static/assets/js/main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+                $('#form').parsley();
+            });
+        window.Parsley.addValidator('checkemail', {
+            validateString: function (value) {
+                return $.ajax({
+                    url: '/app/account/check-email',
+                    type: 'POST',
+                    data: {
+                        email: value
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        return true;
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 

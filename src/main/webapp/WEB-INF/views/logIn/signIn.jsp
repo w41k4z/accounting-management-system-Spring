@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/assets/fonts/fontawesome-5/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="/static/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/static/assets/css/lib/parsley.css">
     <link rel="stylesheet" href="/static/assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <body class="bg-dark">
 
@@ -29,17 +29,17 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form action="/app/account/authenticate" method="POST">
+                    <form action="/app/account/authenticate" method="POST" id="form">
                         <div class="form-group">
                             <label>Email address</label>
-                            <input type="email" class="form-control" placeholder="Email" name="email">
+                            <input type="email" class="form-control" placeholder="Email" name="email" data-parsley-trigger="focusout" required="" data-parsley-checkemail data-parsley-checkemail-message="Email address already in use">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label>Password</label>
-                            <input type="password" class="form-control" placeholder="Password" name="password">
+                            <input type="password" class="form-control" placeholder="Password" data-parsley-minlength="8" data-parsley-maxlength="16" data-parsley-trigger="keyup" name="password" required="">
                         </div>
-                        <button type="submit" class="btn btn-success btn-flat">Sign in</button>
-                        <div class="register-link mt-5 text-center">
+                        <button type="submit" class="btn btn-success btn-flat mt-3">Sign in</button>
+                        <div class="register-link mt-3 text-center">
                             <p>Don't have account ? <a href="/app/account/register"> Sign Up Here</a></p>
                         </div>
                     </form>
@@ -49,10 +49,15 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="/static/assets/js/lib/parsley/parsley.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="/static/assets/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#form').parsley();
+        });
+    </script>
 
 </body>
 </html>

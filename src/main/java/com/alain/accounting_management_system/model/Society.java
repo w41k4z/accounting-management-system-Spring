@@ -8,7 +8,7 @@ import orm.annotation.Column;
 import orm.database.connection.DatabaseConnection;
 import orm.database.object.relation.Relation;
 
-@Table(columnCount = 12)
+@Table(columnCount = 13)
 public class Society extends Relation<Society> {
 
     @PrimaryKey(column = @Column(name = "id"), prefix = "SOC", length = 8, sequence = "society_seq")
@@ -22,6 +22,9 @@ public class Society extends Relation<Society> {
 
     @Column
     private String object;
+
+    @Column
+    private String address;
 
     @Column
     private String headquarters;
@@ -71,6 +74,10 @@ public class Society extends Relation<Society> {
 
     public void setObject(String object) {
         this.object = object;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setHeadquarters(String headquarters) {
@@ -128,6 +135,10 @@ public class Society extends Relation<Society> {
 
     public String getObject() {
         return this.object;
+    }
+
+    public String getAddress() {
+        return this.address;
     }
 
     public String getHeadquarters() {
