@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="/static/assets/fonts/fontawesome-5/css/all.min.css">
     <link rel="stylesheet" href="/static/assets/css/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/assets/css/lib/themify/themify-icons.css">
     <link rel="stylesheet" href="/static/assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="/static/assets/css/style.css">
 
@@ -20,31 +19,28 @@
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
-                    </li>
-                    <li class="menu-title">About</li><!-- /.menu-title -->
+                    <li class="active"><a href=""><i class="fa fa-laptop me-5"></i>Dashboard </a></li>
+                    <li class="menu-title">About</li>
+                    <li><a href=""><i class="fa fa-info me-5"></i>Informations </a></li>
+                    <li class="menu-title">Cloud</li>
+                    <li><a href=""><i class="fa fa-file-alt me-5"></i>Files </a></li>
+                    <li class="menu-title">Accounting</li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Chart of account</a>
-                        <ul class="sub-menu children dropdown-menu">                            <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">Buttons</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">general</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">third party</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-stream"></i>Chart Of Account</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
+                            <li><i class="fa fa-th-large"></i><a href="">General</a></li>
+                            <li><i class="fa fa-th"></i><a href="">Third Party</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-journal-whills"></i>Journal</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
+                            <li><i class="fa fa-quote-left"></i><a href="">Journal Code</a></li>
+                            <li><i class="fa fa-clipboard-list"></i><a href="">Transaction Record</a></li>
                         </ul>
                     </li>
+                    <li><a href=""><i class="fa fa-book-open me-5"></i>General Ledger </a></li>
+                    <li><a href=""><i class="fa fa-balance-scale me-5"></i>Financial Statement </a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -236,58 +232,6 @@
                     </div>
                 </div>
                 <!-- /Widgets -->
-                <!--  Traffic  -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="box-title">Traffic </h4>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="card-body">
-                                        <!-- <canvas id="TrafficChart"></canvas>   -->
-                                        <div id="traffic-chart" class="traffic-chart"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card-body">
-                                        <div class="progress-box progress-1">
-                                            <h4 class="por-title">Visits</h4>
-                                            <div class="por-txt">96,930 Users (40%)</div>
-                                            <div class="progress mb-2" style="height: 5px;">
-                                                <div class="progress-bar bg-flat-color-1" role="progressbar" style="width: 40%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="progress-box progress-2">
-                                            <h4 class="por-title">Bounce Rate</h4>
-                                            <div class="por-txt">3,220 Users (24%)</div>
-                                            <div class="progress mb-2" style="height: 5px;">
-                                                <div class="progress-bar bg-flat-color-2" role="progressbar" style="width: 24%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="progress-box progress-2">
-                                            <h4 class="por-title">Unique Visitors</h4>
-                                            <div class="por-txt">29,658 Users (60%)</div>
-                                            <div class="progress mb-2" style="height: 5px;">
-                                                <div class="progress-bar bg-flat-color-3" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="progress-box progress-2">
-                                            <h4 class="por-title">Targeted  Visitors</h4>
-                                            <div class="por-txt">99,658 Users (90%)</div>
-                                            <div class="progress mb-2" style="height: 5px;">
-                                                <div class="progress-bar bg-flat-color-4" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /.card-body -->
-                                </div>
-                            </div> <!-- /.row -->
-                            <div class="card-body"></div>
-                        </div>
-                    </div><!-- /# column -->
-                </div>
-                <!--  /Traffic -->
                 <div class="clearfix"></div>
                 <!-- Orders -->
                 <div class="orders">
@@ -653,12 +597,8 @@
 
     <!-- Scripts -->
     <script src="/static/assets/js/lib/jquery/jquery-3.6.4.min.js"></script>
+    <script src="/static/assets/css/lib/bootstrap/v4.1.3/js/bootstrap.min.js"></script>
     <script src="/static/assets/js/lib/jquery/jquery.matchHeight.js"></script>
     <script src="/static/assets/js/main.js"></script>
-    <script src="/static/assets/css/lib/bootstrap/js/bootstrap-4.1.3.min.js"></script>
-<%-- 
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="/static/assets/js/main.js"></script> --%>
 </body>
 </html>
