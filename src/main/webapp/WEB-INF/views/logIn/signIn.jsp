@@ -1,3 +1,5 @@
+<% String error = request.getAttribute("error").toString(); %>
+
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -5,12 +7,8 @@
     <title>Log In</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/assets/css/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/static/assets/fonts/fontawesome-5/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="/static/assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="/static/assets/css/lib/parsley.css">
     <link rel="stylesheet" href="/static/assets/css/style.css">
@@ -29,16 +27,21 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form action="/app/account/authenticate" method="POST" id="form">
+                    <form action="/ela-admin/account/authenticate" method="POST" id="form">
                         <div class="form-group">
                             <label>Email address</label>
-                            <input type="email" class="form-control" placeholder="Email" name="email" data-parsley-trigger="focusout" required="" data-parsley-checkemail data-parsley-checkemail-message="Email address already in use">
+                            <input value="admin@gmail.com" type="email" class="form-control" placeholder="Email" name="email" data-parsley-trigger="focusout" required="" data-parsley-checkemail data-parsley-checkemail-message="Email address already in use">
                         </div>
                         <div class="form-group mt-3">
                             <label>Password</label>
-                            <input type="password" class="form-control" placeholder="Password" data-parsley-minlength="8" data-parsley-maxlength="16" data-parsley-trigger="keyup" name="password" required="">
+                            <input value="12345678" type="password" class="form-control" placeholder="Password" data-parsley-minlength="8" data-parsley-maxlength="16" data-parsley-trigger="keyup" name="password" required="">
                         </div>
                         <button type="submit" class="btn btn-success btn-flat mt-3">Sign in</button>
+                        <% if(error.length() > 0) { %>
+                        <p class="alert alert-danger mt-3" role="alert">
+                            <%= error %>
+                        </p>
+                        <% } %>
                         <div class="register-link mt-3 text-center">
                             <p>Don't have account ? <a href="/app/account/register"> Sign Up Here</a></p>
                         </div>

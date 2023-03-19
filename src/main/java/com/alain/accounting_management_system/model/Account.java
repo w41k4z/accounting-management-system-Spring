@@ -100,6 +100,7 @@ public class Account extends Relation<Account> {
 
     public static Account authenticate(DatabaseConnection connection, String email, String password) throws Exception {
         String spec = "WHERE email='" + email + "' AND password='" + password + "'";
-        return new Account().findAll(connection, spec)[0];
+        Account[] accounFound = new Account().findAll(connection, spec);
+        return accounFound.length > 0 ? accounFound[0] : null;
     }
 }

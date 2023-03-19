@@ -6,7 +6,7 @@ import orm.annotation.Column;
 import orm.database.connection.DatabaseConnection;
 import orm.database.object.relation.Relation;
 
-@Table(name = "society_account", columnCount = 3)
+@Table(name = "society_account", columnCount = 4)
 public class SocietyAccount extends Relation<SocietyAccount> {
 
     @PrimaryKey(column = @Column(name = "id"), prefix = "SAC", length = 8, sequence = "society_account_seq")
@@ -14,8 +14,6 @@ public class SocietyAccount extends Relation<SocietyAccount> {
 
     @Column(name = "account_id")
     private String accountID;
-
-    private Account account;
 
     @Column(name = "society_id")
     private String societyID;
@@ -39,10 +37,6 @@ public class SocietyAccount extends Relation<SocietyAccount> {
         this.accountID = account_id;
     }
 
-    private void setAccount(Account account) {
-        this.account = account;
-    }
-
     public void setSocietyID(String society_id) {
         this.societyID = society_id;
     }
@@ -64,10 +58,6 @@ public class SocietyAccount extends Relation<SocietyAccount> {
         return accountID;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
     public String getSocietyID() {
         return this.societyID;
     }
@@ -81,11 +71,6 @@ public class SocietyAccount extends Relation<SocietyAccount> {
     }
 
     // methods
-    private void getAccount(DatabaseConnection connection) throws Exception {
-        Account account = new Account().findByPrimaryKey(connection, this.getAccountID());
-        this.setAccount(account);
-    }
-
     private void getSociety(DatabaseConnection connection) throws Exception {
         Society society = new Society().findByPrimaryKey(connection, this.getSocietyID());
         this.setSociety(society);
@@ -95,7 +80,6 @@ public class SocietyAccount extends Relation<SocietyAccount> {
     public SocietyAccount[] findAll(DatabaseConnection connection) throws Exception {
         SocietyAccount[] societyAccounts = super.findAll(connection);
         for (SocietyAccount societyAccount : societyAccounts) {
-            societyAccount.getAccount(connection);
             societyAccount.getSociety(connection);
         }
         return societyAccounts;
@@ -105,7 +89,6 @@ public class SocietyAccount extends Relation<SocietyAccount> {
     public SocietyAccount[] findAll(DatabaseConnection connection, String spec) throws Exception {
         SocietyAccount[] societyAccounts = super.findAll(connection, spec);
         for (SocietyAccount societyAccount : societyAccounts) {
-            societyAccount.getAccount(connection);
             societyAccount.getSociety(connection);
         }
         return societyAccounts;
@@ -114,7 +97,6 @@ public class SocietyAccount extends Relation<SocietyAccount> {
     @Override
     public SocietyAccount findByPrimaryKey(DatabaseConnection connection) throws Exception {
         SocietyAccount societyAccount = super.findByPrimaryKey(connection);
-        societyAccount.getAccount(connection);
         societyAccount.getSociety(connection);
         return societyAccount;
     }
@@ -122,7 +104,6 @@ public class SocietyAccount extends Relation<SocietyAccount> {
     @Override
     public SocietyAccount findByPrimaryKey(DatabaseConnection connection, String pk) throws Exception {
         SocietyAccount societyAccount = super.findByPrimaryKey(connection, pk);
-        societyAccount.getAccount(connection);
         societyAccount.getSociety(connection);
         return societyAccount;
     }
