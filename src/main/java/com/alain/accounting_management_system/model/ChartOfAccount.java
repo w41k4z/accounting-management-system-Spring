@@ -3,6 +3,9 @@ package com.alain.accounting_management_system.model;
 import orm.database.connection.DatabaseConnection;
 import orm.database.object.relation.Relation;
 import orm.annotation.PrimaryKey;
+
+import java.util.List;
+
 import orm.annotation.Column;
 import orm.annotation.Table;
 
@@ -129,5 +132,18 @@ public class ChartOfAccount extends Relation<ChartOfAccount> {
             validAccountNumber.append("0");
         }
         return validAccountNumber.toString();
+    }
+
+    /*
+     * First element of the list must be the the column name
+     */
+    public static void insertImportedData(DatabaseConnection connection, List<List<String>> data) throws Exception {
+        String[] columnName = data.get(0).toArray(new String[data.get(0).size()]);
+        for (int i = 0; i < data.size(); i++) {
+            ChartOfAccount toCreate = new ChartOfAccount();
+            for (int j = 0; j < columnName.length; j++) {
+                // toCreate.get
+            }
+        }
     }
 }

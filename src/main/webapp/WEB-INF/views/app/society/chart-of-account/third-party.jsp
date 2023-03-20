@@ -140,6 +140,9 @@
                                         <hr>
                                         <form action="">
                                             <input class="form-control form-control-sm" id="formFileSm" type="file">
+                                            <div class="mt-3 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary">Import</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div><!-- /.card -->

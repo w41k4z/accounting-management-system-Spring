@@ -146,8 +146,11 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Import</h5>
                                         <hr>
-                                        <form action="">
-                                            <input class="form-control form-control-sm" id="formFileSm" type="file">
+                                        <form action="/ela-admin/society/chart-of-account/import-general-account" method="POST" enctype="multipart/form-data">
+                                            <input class="form-control form-control-sm" id="formFileSm" type="file" name="file">
+                                            <div class="mt-3 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary">Import</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div><!-- /.card -->

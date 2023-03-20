@@ -56,6 +56,13 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/postgresql-42.4.3.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>com.alain</groupId>
+			<artifactId>r-w-x_file</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/r-w-x_file.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 	<build>
