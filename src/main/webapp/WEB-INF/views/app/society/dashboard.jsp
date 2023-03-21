@@ -30,27 +30,27 @@
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href=""><i class="fa fa-laptop me-5"></i>Dashboard </a></li>
+                    <li class="active"><a href=""><i class="menu-icon fa fa-laptop"></i>Dashboard </a></li>
                     <li class="menu-title">About</li>
-                    <li><a href=""><i class="fa fa-info me-5"></i>Informations </a></li>
-                    <li><a href=""><i class="fa fa-file-alt me-5"></i>Files </a></li>
+                    <li><a href=""><i class="menu-icon fa fa-info"></i>Informations </a></li>
+                    <li><a href=""><i class="menu-icon fa fa-file-alt"></i>Files </a></li>
                     <li class="menu-title">Accounting</li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-stream"></i>Chart Of Account</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-th-large"></i><a href="/ela-admin/society/home-page/chart-of-account/general">General</a></li>
-                            <li><i class="fa fa-th"></i><a href="/ela-admin/society/home-page/chart-of-account/third-party">Third Party</a></li>
+                            <li><i class="menu-icon fa fa-th-large"></i><a href="/ela-admin/society/home-page/chart-of-account/general">General</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="/ela-admin/society/home-page/chart-of-account/third-party">Third Party</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-journal-whills"></i>Journal</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-quote-left"></i><a href="">Journal Code</a></li>
-                            <li><i class="fa fa-clipboard-list"></i><a href="">Transaction Record</a></li>
+                            <li><i class="menu-icon fa fa-quote-left"></i><a href="">Journal Code</a></li>
+                            <li><i class="menu-icon fa fa-clipboard-list"></i><a href="">Transaction Record</a></li>
                         </ul>
                     </li>
-                    <li><a href=""><i class="fa fa-book-open me-5"></i>General Ledger </a></li>
-                    <li><a href=""><i class="fa fa-balance-scale me-5"></i>Financial Statement </a></li>
+                    <li><a href=""><i class="menu-icon fa fa-book-open"></i>General Ledger </a></li>
+                    <li><a href=""><i class="menu-icon fa fa-balance-scale"></i>Financial Statement </a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

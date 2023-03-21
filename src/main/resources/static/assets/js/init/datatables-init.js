@@ -9,7 +9,7 @@
 
 
     $('#bootstrap-data-table').DataTable({
-        lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
     });
 
 

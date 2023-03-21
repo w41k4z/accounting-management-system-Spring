@@ -1,3 +1,8 @@
+<%@ page import="com.alain.accounting_management_system.model.ThirdPartyChartOfAccount" %>
+<%
+    ThirdPartyChartOfAccount[] thirdPartyAccounts = (ThirdPartyChartOfAccount[]) request.getAttribute("thirdPartyAccount");
+%>
+
 <!DOCTYPE html>
 
 <head>
@@ -30,27 +35,27 @@
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/ela-admin/society/home-page/dashboard"><i class="fa fa-laptop me-5"></i>Dashboard </a></li>
+                    <li><a href="/ela-admin/society/home-page/dashboard"><i class="menu-icon fa fa-laptop me-5"></i>Dashboard </a></li>
                     <li class="menu-title">About</li>
-                    <li><a href=""><i class="fa fa-info me-5"></i>Informations </a></li>
-                    <li><a href=""><i class="fa fa-file-alt me-5"></i>Files </a></li>
+                    <li><a href=""><i class="menu-icon fa fa-info"></i>Informations </a></li>
+                    <li><a href=""><i class="menu-icon fa fa-file-alt"></i>Files </a></li>
                     <li class="menu-title">Accounting</li>
                     <li class="menu-item-has-children dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-stream"></i>Chart Of Account</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-th-large"></i><a href="/ela-admin/society/home-page/chart-of-account/general">General</a></li>
-                            <li><i class="fa fa-th"></i><a href="/ela-admin/society/home-page/chart-of-account/third-party">Third Party</a></li>
+                            <li><i class="menu-icon fa fa-th-large"></i><a href="/ela-admin/society/home-page/chart-of-account/general">General</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="/ela-admin/society/home-page/chart-of-account/third-party">Third Party</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-journal-whills"></i>Journal</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-quote-left"></i><a href="">Journal Code</a></li>
-                            <li><i class="fa fa-clipboard-list"></i><a href="">Transaction Record</a></li>
+                            <li><i class="menu-icon fa fa-quote-left"></i><a href="">Journal Code</a></li>
+                            <li><i class="menu-icon fa fa-clipboard-list"></i><a href="">Transaction Record</a></li>
                         </ul>
                     </li>
-                    <li><a href=""><i class="fa fa-book-open me-5"></i>General Ledger </a></li>
-                    <li><a href=""><i class="fa fa-balance-scale me-5"></i>Financial Statement </a></li>
+                    <li><a href=""><i class="menu-icon fa fa-book-open"></i>General Ledger </a></li>
+                    <li><a href=""><i class="menu-icon fa fa-balance-scale"></i>Financial Statement </a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -81,115 +86,135 @@
         <div class="content">
             <!-- Animated -->
             <div class="animated fadeIn">
-                <div class="row">
-                    <div class="col-xl-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="box-title">Third Party </h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-stats order-table ov-h">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Type</th>
-                                                <th>Name</th>
-                                                <th>Entitled</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1.</td>
-                                                <td> FO </td>
-                                                <td> John </td>
-                                                <td> FRNS: John </td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <a class="btn btn-warning" href="">Modify</a>
-                                                        <a class="btn btn-danger" href="">Delete</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2.</td>
-                                                <td> CT </td>
-                                                <td> David </td>
-                                                <td> CLT: David </td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <a class="btn btn-warning" href="">Modify</a>
-                                                        <a class="btn btn-danger" href="">Delete</a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div> <!-- /.table-stats -->
-                            </div>
-                        </div> <!-- /.card -->
-                    </div>  <!-- /.col-lg-8 -->
+                <div>
+                    <div class="card">
+                        <div class="card-body d-flex justify-content-between">
+                            <h4 class="box-title">Third Party </h4>
+                            <div>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#insertModal"><i class="fa fa-plus"></i></button>
 
-                    <div class="col-xl-4">
-                        <div class="row">
-                            <div class="col-lg-6 col-xl-12">
-                                <div class="card br-0">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Import</h5>
-                                        <hr>
-                                        <form action="">
-                                            <input class="form-control form-control-sm" id="formFileSm" type="file">
-                                            <div class="mt-3 d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-primary">Import</button>
+                                <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header d-flex justify-content-between">
+                                                <h4 class="modal-title" id="mediumModalLabel">Choose your insert method</h4>
+                                                <button class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                        </form>
-                                    </div>
-                                </div><!-- /.card -->
-                            </div>
+                                            <div class="model-body row justify-content-around mt-3 p-3">
+                                                <div class="col-md-5">
+                                                    <div class="card br-0">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Import</h5>
+                                                            <hr>
+                                                            <p>Supported file : csv, xls, xlsx, ods</p>
+                                                            <form action="/ela-admin/society/chart-of-account/import-general-account" method="POST" enctype="multipart/form-data">
+                                                                <input class="form-control form-control-sm" id="formFileSm" type="file" name="file">
+                                                                <div class="mt-3 d-flex justify-content-end">
+                                                                    <button type="submit" class="btn btn-primary">Import</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div><!-- /.card -->
+                                                </div>
 
-                            <div class="col-lg-6 col-xl-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title m-0 text-dark">Add manually</h4>
-                                        <hr>
+                                                <p class="col-md-2 text-center"> <strong>OR</strong> </p>
+
+                                                <div class="col-md-5">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title m-0 text-dark">Add manually</h4>
+                                                            <hr>
+                                                        </div>
+                                                        <form class="row g-3 px-3">
+                                                            <div class="col-auto col-lg-12">
+                                                                <input type="number" class="form-control" placeholder="Account Number" name="accountNumber">
+                                                            </div>
+                                                            <div class="col-auto col-lg-12">
+                                                                <input type="text" class="form-control" placeholder="Entitled" name="entitled">
+                                                            </div>
+                                                            <div class="col-auto ms-auto">
+                                                                <button type="submit" class="btn btn-primary mb-3">Confirm</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <form class="row g-3 px-3">
-                                        <div class="col-lg-12">
-                                            <div class="form-floating">
-                                                <select id="account" class="form-select" name="accountNumber">
-                                                    <option value="">402000</option>
-                                                    <option value="">41000</option>
-                                                </select>
-                                                <label for="account">Account related</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-floating">
-                                                <select id="type" class="form-select" name="type">
-                                                    <option value="">FO</option>
-                                                    <option value="">CT</option>
-                                                </select>
-                                                <label for="type">Type</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto col-lg-12">
-                                            <input type="text" class="form-control" placeholder="Name" name="name">
-                                        </div>
-                                        <div class="col-auto col-lg-12">
-                                            <input type="text" class="form-control" placeholder="Entitled" name="entitled">
-                                        </div>
-                                        <div class="col-auto ms-auto">
-                                            <button type="submit" class="btn btn-primary mb-3">Confirm</button>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- /.col-md-4 -->
+                        <div class="card-body">
+                            <table id="bootstrap-data-table" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Type</th>
+                                        <th>Entitled</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(int i = 0; i < thirdPartyAccounts.length; i++) { %>
+                                    <tr>
+                                        <td><%= (i+1) %>.</td>
+                                        <td> <span class="count"><%= thirdPartyAccounts[i].getKey() %></span> </td>
+                                        <td><%= thirdPartyAccounts[i].getValue() %></td>
+                                        <td class="d-flex justify-content-center">
+                                            <div class="btn-group">
+
+                                                <button class="btn btn-warning" data-toggle="modal" data-target="#edit<%= thirdPartyAccounts[i].getKey() + i %>"><i class="fa fa-edit"></i></button>
+                                                <%-- Edit Modal --%>
+                                                <div class="modal fade" id="edit<%= thirdPartyAccounts[i].getKey() + i %>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header d-flex justify-content-between">
+                                                                <h5 class="modal-title" id="mediumModalLabel">Update account</h5>
+                                                                <button class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form class="modal-body row g-3 px-3">
+                                                                <div class="col-auto col-lg-12">
+                                                                    <input type="text" class="form-control" placeholder="Type" name="key" value="<%= thirdPartyAccounts[i].getKey() %>">
+                                                                </div>
+                                                                <div class="col-auto col-lg-12">
+                                                                    <input type="text" class="form-control" placeholder="Entitled" name="value" value="<%= thirdPartyAccounts[i].getValue() %>">
+                                                                </div>
+                                                                <div class="col-auto ms-auto">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-warning">Update</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- /.Edit Modal --%>
+
+                                                <button class="btn btn-danger" data-toggle="modal" data-target="#suppress<%= thirdPartyAccounts[i].getKey() + i %>"><i class="fa fa-times"></i></button>
+                                                <%-- Suppress Modal --%>
+                                                <div class="modal fade" id="suppress<%= thirdPartyAccounts[i].getKey() + i %>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3 class="modal-title text-danger text-center" id="mediumModalLabel">Are you sure to delete this ?</h3>
+                                                            </div>
+                                                            <div class="modal-footer d-flex justify-content-center">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                <button type="button" class="btn btn-danger">Confirm</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- /.Suppress Modal --%>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> <!-- /.card -->
                 </div>
-                <!-- /.orders -->
-            <!-- /#add-category -->
+                <!-- /.div -->
             </div>
             <!-- .animated -->
         </div>

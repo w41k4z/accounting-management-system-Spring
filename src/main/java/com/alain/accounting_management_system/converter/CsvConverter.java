@@ -19,7 +19,7 @@ import fileActivity.Executor;
 
 public class CsvConverter {
 
-    private final List<String> validExtension = Arrays.asList(new String[] { "xls", "ods" });
+    private final List<String> validExtension = Arrays.asList(new String[] { "csv", "xls", "ods" });
     private File fileToConvert;
 
     // constructor
@@ -43,6 +43,9 @@ public class CsvConverter {
 
     // method
     public File convertToCsv() throws Exception {
+        if (Executor.getFileExtension(this.getFileToConvert()).toLowerCase().equals("csv")) {
+            return this.getFileToConvert();
+        }
         File convertedFile = new File("CsvFile.csv");
         Writer writer = new OutputStreamWriter(new FileOutputStream(convertedFile), "UTF-8");
 
