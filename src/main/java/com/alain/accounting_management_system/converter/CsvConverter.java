@@ -58,7 +58,9 @@ public class CsvConverter {
             for (Cell cell : row) {
                 // Convert cell value to string and add to list
                 String cellValue = cell.getCellType() == CellType.STRING ? cell.getStringCellValue()
-                        : cell.getNumericCellValue() + "";
+                        : (cell.getNumericCellValue() + "").endsWith(".0") ? (int) cell.getNumericCellValue() + ""
+                                : cell.getNumericCellValue() + "";
+
                 cells.add(cellValue);
             }
             String[] rowArray = cells.toArray(new String[cells.size()]);
@@ -78,6 +80,7 @@ public class CsvConverter {
 
         writer.close();
 
+        this.getFileToConvert().delete();
         return convertedFile;
     }
 }

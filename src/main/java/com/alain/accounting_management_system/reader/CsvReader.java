@@ -17,6 +17,7 @@ public class CsvReader {
     // constructor
     public CsvReader(File file, String separator) throws Exception {
         this.setCsvFile(file);
+        this.setSeparator(separator);
     }
 
     // setters
@@ -47,6 +48,7 @@ public class CsvReader {
         for (String line : result) {
             content.add(Arrays.asList(line.split(this.getSeparator())));
         }
+        this.getCsvFile().delete();
         return content;
     }
 }

@@ -55,6 +55,8 @@ CREATE TABLE chart_of_account (
     society_id VARCHAR(7) REFERENCES society(id),
     entitled VARCHAR(50)
 );
+ALTER TABLE chart_of_account
+  ADD CONSTRAINT uq_chart_of_account UNIQUE(account_number, society_id);
 CREATE TABLE third_party_chart_of_account (
     thd_pt_chrt_acc_id VARCHAR(8) PRIMARY KEY,
     chrt_acc_id VARCHAR(8) REFERENCES chart_of_account(id),

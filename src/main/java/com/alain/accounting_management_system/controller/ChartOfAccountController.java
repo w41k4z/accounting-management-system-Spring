@@ -12,12 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alain.accounting_management_system.connection.AppDBCon;
 import com.alain.accounting_management_system.converter.CsvConverter;
+import com.alain.accounting_management_system.model.Account;
 import com.alain.accounting_management_system.model.ChartOfAccount;
 import com.alain.accounting_management_system.model.Society;
 import com.alain.accounting_management_system.model.ThirdPartyChartOfAccount;
 import com.alain.accounting_management_system.reader.CsvReader;
 
 import jakarta.servlet.http.HttpSession;
+import orm.database.connection.DatabaseConnection;
 
 @Controller
 @RequestMapping("/ela-admin/society/chart-of-account")
@@ -32,18 +34,24 @@ public class ChartOfAccountController {
     }
 
     @PostMapping("/import-general-account")
-    @ResponseBody
     public String importChartOfAccount(@RequestParam MultipartFile file, HttpSession session) {
         if (session.getAttribute("account") == null) {
             return "redirect:/ela-admin";
         }
         try {
+            DatabaseConnection connection = new AppDBCon().defaultConnection();
+            Account account = (Account) session.getAttribute("account");
             File uploadedFile = convertMultipartFileToFile(file);
             CsvConverter csvConverter = new CsvConverter(uploadedFile);
             CsvReader csvReader = new CsvReader(csvConverter.convertToCsv(), ";;");
+            ChartOfAccount.insertImportedData(connection, csvReader.getContent(),
+                    account.getSocietyAccounts()[0].getSocietyID());
+            connection.commit();
+            connection.close();
         } catch (Exception e) {
-            return e.getMessage();
+            return "redirect:/ela-admin/error?error=" + e.getMessage();
         }
+        return "redirect:/ela-admin/society/home-page/chart-of-account/general";
     }
 
     @PostMapping("/new-general-account")

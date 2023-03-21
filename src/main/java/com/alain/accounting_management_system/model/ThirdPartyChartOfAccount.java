@@ -107,12 +107,4 @@ public class ThirdPartyChartOfAccount extends Relation<ThirdPartyChartOfAccount>
         thirdPartyChartOfAccount.getChartOfAccount(connection);
         return thirdPartyChartOfAccount;
     }
-
-    @Override
-    public int create(DatabaseConnection connection) throws Exception {
-        // this create method is not available for this model,
-        // because it needs a manual primary key
-        // instead of a generated one
-        return 0;
-    }
 }
