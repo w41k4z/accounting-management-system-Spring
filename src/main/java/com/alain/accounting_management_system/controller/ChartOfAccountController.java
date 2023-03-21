@@ -25,7 +25,7 @@ import orm.database.connection.DatabaseConnection;
 @RequestMapping("/ela-admin/society/chart-of-account")
 public class ChartOfAccountController {
 
-    public File convertMultipartFileToFile(MultipartFile multipartFile) throws Exception {
+    private File convertMultipartFileToFile(MultipartFile multipartFile) throws Exception {
         File file = new File(multipartFile.getOriginalFilename());
         FileOutputStream outputStream = new FileOutputStream(file);
         outputStream.write(multipartFile.getBytes());
@@ -33,6 +33,7 @@ public class ChartOfAccountController {
         return file;
     }
 
+    // general account
     @PostMapping("/import-general-account")
     public String importChartOfAccount(@RequestParam MultipartFile file, HttpSession session) {
         if (session.getAttribute("account") == null) {
@@ -54,14 +55,15 @@ public class ChartOfAccountController {
         return "redirect:/ela-admin/society/home-page/chart-of-account/general";
     }
 
-    @PostMapping("/new-general-account")
-    public String addNewChartOfAccount(@RequestParam String accountNumber, @RequestParam String entitled,
+    @PostMapping("/create-general-account")
+    public String createChartOfAccount(@RequestParam String accountNumber, @RequestParam String entitled,
             HttpSession session) {
         if (session.getAttribute("account") == null) {
             return "redirect:/ela-admin";
         }
         try {
-            Society currentSociety = (Society) session.getAttribute("account");
+            Account account = (Account) session.getAttribute("account");
+            Society currentSociety = account.getSocietyAccounts()[0].getSociety();
 
             ChartOfAccount newChartOfAccount = new ChartOfAccount();
             newChartOfAccount.setAccountNumber(accountNumber);
@@ -75,6 +77,42 @@ public class ChartOfAccountController {
         return "redirect:/ela-admin/society/home-page/chart-of-account/general";
     }
 
+    @PostMapping("/update-general-account")
+    public String updateChartOfAccount(@RequestParam String accountID, @RequestParam String accountNumber,
+            @RequestParam String entitled, HttpSession session) {
+        if (session.getAttribute("account") == null) {
+            return "redirect:/ela-admin";
+        }
+        ChartOfAccount toUpdate;
+        try {
+            toUpdate = new ChartOfAccount();
+            toUpdate.setAccountNumberID(accountID);
+            toUpdate.setAccountNumber(accountNumber);
+            toUpdate.setEntitled(entitled);
+
+            toUpdate.update(new AppDBCon());
+        } catch (Exception e) {
+            return "redirect:/ela-admin/error?error=" + e.getMessage();
+        }
+        return "redirect:/ela-admin/society/home-page/chart-of-account/general";
+    }
+
+    @PostMapping("/delete-general-account")
+    public String deleteChartOfAccount(@RequestParam String accountID, HttpSession session) {
+        if (session.getAttribute("account") == null) {
+            return "redirect:/ela-admin";
+        }
+        try {
+            ChartOfAccount toDelete = new ChartOfAccount();
+            toDelete.setAccountNumberID(accountID);
+            toDelete.delete(new AppDBCon());
+        } catch (Exception e) {
+            return "redirect:/ela-admin/error?error=" + e.getMessage();
+        }
+        return "redirect:/ela-admin/society/home-page/chart-of-account/general";
+    }
+
+    // third party account
     @PostMapping("/new-third-party-account")
     public String addNewThirdPartyChartOfAccount(@RequestParam String accountNumber, @RequestParam String type,
             @RequestParam String name,

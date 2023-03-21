@@ -29,7 +29,7 @@ public class SocietyController {
         try {
             Account account = (Account) session.getAttribute("account");
             model.addAttribute("generalAccount", new ChartOfAccount().findAll(new AppDBCon(),
-                    "WHERE society_id = '" + account.getSocietyAccounts()[0].getSocietyID() + "'"));
+                    "WHERE society_id = '" + account.getSocietyAccounts()[0].getSocietyID() + "' ORDER BY id"));
             model.addAttribute("thirdPartyAccount", new ThirdPartyChartOfAccount().findAll(new AppDBCon(),
                     "JOIN chart_of_account ON chart_of_account.id = chrt_acc_id WHERE chart_of_account.society_id = '"
                             + account.getSocietyAccounts()[0].getSocietyID() + "'"));

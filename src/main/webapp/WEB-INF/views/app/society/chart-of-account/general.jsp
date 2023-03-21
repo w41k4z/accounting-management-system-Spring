@@ -126,7 +126,7 @@
                                                             <h4 class="card-title m-0 text-dark">Add manually</h4>
                                                             <hr>
                                                         </div>
-                                                        <form class="row g-3 px-3">
+                                                        <form action="/ela-admin/society/chart-of-account/create-general-account" class="row g-3 px-3" method="POST">
                                                             <div class="col-auto col-lg-12">
                                                                 <input type="number" class="form-control" placeholder="Account Number" name="accountNumber">
                                                             </div>
@@ -173,7 +173,8 @@
                                                                 <h5 class="modal-title" id="mediumModalLabel">Update account</h5>
                                                                 <button class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <form class="modal-body row g-3 px-3">
+                                                            <form action="/ela-admin/society/chart-of-account/update-general-account" class="modal-body row g-3 px-3" method="POST">
+                                                                <input type="hidden" name="accountID" value="<%= generalAccounts[i].getAccountNumberID() %>" />
                                                                 <div class="col-auto col-lg-12">
                                                                     <input type="number" class="form-control" placeholder="Account Number" name="accountNumber" value="<%= generalAccounts[i].getAccountNumber() %>">
                                                                 </div>
@@ -190,19 +191,20 @@
                                                 </div>
                                                 <%-- /.Edit Modal --%>
 
-                                                <button class="btn btn-danger" data-toggle="modal" data-target="#suppress<%= generalAccounts[i].getAccountNumber() %>"><i class="fa fa-times"></i></button>
+                                                <button class="btn btn-danger" data-toggle="modal" data-target="#suppress<%= generalAccounts[i].getAccountNumberID() %>"><i class="fa fa-times"></i></button>
                                                 <%-- Suppress Modal --%>
-                                                <div class="modal fade" id="suppress<%= generalAccounts[i].getAccountNumber() %>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="suppress<%= generalAccounts[i].getAccountNumberID() %>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
+                                                        <form action="/ela-admin/society/chart-of-account/delete-general-account" class="modal-content" method="POST">
+                                                            <input type="hidden" name="accountID" value="<%= generalAccounts[i].getAccountNumberID() %>" />
                                                             <div class="modal-header">
                                                                 <h3 class="modal-title text-danger text-center" id="mediumModalLabel">Are you sure to delete this ?</h3>
                                                             </div>
                                                             <div class="modal-footer d-flex justify-content-center">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                <button type="button" class="btn btn-danger">Confirm</button>
+                                                                <button type="submit" class="btn btn-danger">Confirm</button>
                                                             </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <%-- /.Suppress Modal --%>

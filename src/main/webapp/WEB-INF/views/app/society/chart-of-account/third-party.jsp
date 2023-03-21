@@ -193,15 +193,15 @@
                                                 <%-- Suppress Modal --%>
                                                 <div class="modal fade" id="suppress<%= thirdPartyAccounts[i].getKey() + i %>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
+                                                        <form class="modal-content" method="POST">
                                                             <div class="modal-header">
                                                                 <h3 class="modal-title text-danger text-center" id="mediumModalLabel">Are you sure to delete this ?</h3>
                                                             </div>
                                                             <div class="modal-footer d-flex justify-content-center">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                <button type="button" class="btn btn-danger">Confirm</button>
+                                                                <button type="submit" class="btn btn-danger">Confirm</button>
                                                             </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <%-- /.Suppress Modal --%>
