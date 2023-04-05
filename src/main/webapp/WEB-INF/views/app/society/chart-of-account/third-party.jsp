@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Home Page</title>
+    <title>Third Party Account</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="/static/assets/fonts/fontawesome-5/css/all.min.css">
@@ -35,7 +35,7 @@
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/ela-admin/society/home-page/dashboard"><i class="menu-icon fa fa-laptop me-5"></i>Dashboard </a></li>
+                    <li><a href="/ela-admin/society/home-page/dashboard"><i class="menu-icon fa fa-laptop"></i>Dashboard </a></li>
                     <li class="menu-title">About</li>
                     <li><a href=""><i class="menu-icon fa fa-info"></i>Informations </a></li>
                     <li><a href=""><i class="menu-icon fa fa-file-alt"></i>Files </a></li>
@@ -50,11 +50,11 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-journal-whills"></i>Journal</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-quote-left"></i><a href="">Journal Code</a></li>
-                            <li><i class="menu-icon fa fa-clipboard-list"></i><a href="">Transaction Record</a></li>
+                            <li><i class="menu-icon fa fa-quote-left"></i><a href="/ela-admin/society/home-page/journal/journal-code">Journal Code</a></li>
+                            <li><i class="menu-icon fa fa-clipboard-list"></i><a href="/ela-admin/society/home-page/journal/transaction-record">Transaction Record</a></li>
                         </ul>
                     </li>
-                    <li><a href=""><i class="menu-icon fa fa-book-open"></i>General Ledger </a></li>
+                    <li><a href="/ela-admin/society/home-page/general-ledger"><i class="menu-icon fa fa-book-open"></i>General Ledger </a></li>
                     <li><a href=""><i class="menu-icon fa fa-balance-scale"></i>Financial Statement </a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -77,7 +77,6 @@
                     <a href="/ela-admin/society/disconnect" class="logout dropdown float-right">
                         ${account.getSocietyAccounts()[0].getSociety().getName()} <i class="fa fa-power-off"></i>
                     </a>
-
                 </div>
             </div>
         </header>
@@ -106,8 +105,8 @@
                                                         <div class="card-body">
                                                             <h5 class="card-title">Import</h5>
                                                             <hr>
-                                                            <p>Supported file : csv, xls, xlsx, ods</p>
-                                                            <form action="/ela-admin/society/chart-of-account/import-general-account" method="POST" enctype="multipart/form-data">
+                                                            <p>Supported file : csv, xls, xlsx</p>
+                                                            <form action="/ela-admin/society/chart-of-account/import-third-party-account" method="POST" enctype="multipart/form-data">
                                                                 <input class="form-control form-control-sm" id="formFileSm" type="file" name="file">
                                                                 <div class="mt-3 d-flex justify-content-end">
                                                                     <button type="submit" class="btn btn-primary">Import</button>
@@ -125,9 +124,9 @@
                                                             <h4 class="card-title m-0 text-dark">Add manually</h4>
                                                             <hr>
                                                         </div>
-                                                        <form class="row g-3 px-3">
+                                                        <form action="/ela-admin/society/chart-of-account/create-third-party-account" class="row g-3 px-3" method="POST">
                                                             <div class="col-auto col-lg-12">
-                                                                <input type="number" class="form-control" placeholder="Account Number" name="accountNumber">
+                                                                <input type="text" class="form-control" placeholder="Type" name="type">
                                                             </div>
                                                             <div class="col-auto col-lg-12">
                                                                 <input type="text" class="form-control" placeholder="Entitled" name="entitled">
@@ -158,7 +157,7 @@
                                     <% for(int i = 0; i < thirdPartyAccounts.length; i++) { %>
                                     <tr>
                                         <td><%= (i+1) %>.</td>
-                                        <td> <span class="count"><%= thirdPartyAccounts[i].getKey() %></span> </td>
+                                        <td> <%= thirdPartyAccounts[i].getKey() %> </td>
                                         <td><%= thirdPartyAccounts[i].getValue() %></td>
                                         <td class="d-flex justify-content-center">
                                             <div class="btn-group">
@@ -172,7 +171,8 @@
                                                                 <h5 class="modal-title" id="mediumModalLabel">Update account</h5>
                                                                 <button class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <form class="modal-body row g-3 px-3">
+                                                            <form action="/ela-admin/society/chart-of-account/update-third-party-account" class="modal-body row g-3 px-3" method="POST">
+                                                                <input type="hidden" name="accountID" value="<%= thirdPartyAccounts[i].getThirdPartyChartOfAccountID() %>" />
                                                                 <div class="col-auto col-lg-12">
                                                                     <input type="text" class="form-control" placeholder="Type" name="key" value="<%= thirdPartyAccounts[i].getKey() %>">
                                                                 </div>
@@ -193,7 +193,8 @@
                                                 <%-- Suppress Modal --%>
                                                 <div class="modal fade" id="suppress<%= thirdPartyAccounts[i].getKey() + i %>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                                                        <form class="modal-content" method="POST">
+                                                        <form action="/ela-admin/society/chart-of-account/delete-third-party-account" class="modal-content" method="POST">
+                                                            <input type="hidden" name="accountID" value="<%= thirdPartyAccounts[i].getThirdPartyChartOfAccountID() %>" />
                                                             <div class="modal-header">
                                                                 <h3 class="modal-title text-danger text-center" id="mediumModalLabel">Are you sure to delete this ?</h3>
                                                             </div>
@@ -239,5 +240,18 @@
     <script src="/static/assets/css/lib/bootstrap/v4.1.3/js/bootstrap.min.js"></script>
     <script src="/static/assets/js/lib/jquery/jquery.matchHeight.js"></script>
     <script src="/static/assets/js/main.js"></script>
+
+    <%-- Data Table --%>
+    <script src="/static/assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/jszip.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/static/assets/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/static/assets/js/init/datatables-init.js"></script>
+
 </body>
 </html>

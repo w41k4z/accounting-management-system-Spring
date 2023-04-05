@@ -1,6 +1,6 @@
-<%@ page import="com.alain.accounting_management_system.model.ChartOfAccount" %>
+<%@ page import="com.alain.accounting_management_system.model.JournalCode" %>
 <%
-    ChartOfAccount[] generalAccounts = (ChartOfAccount[]) request.getAttribute("generalAccount");
+    JournalCode[] journalCodes = (JournalCode[]) request.getAttribute("journalCodes");
 %>
 
 <!DOCTYPE html>
@@ -8,14 +8,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>General Account</title>
+    <title>Journal code</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="/static/assets/fonts/fontawesome-5/css/all.min.css">
     <link rel="stylesheet" href="/static/assets/css/lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="/static/assets/css/style.css">
-    <link rel="stylesheet" href="/static/assets/css/lib/datatable/dataTables.bootstrap.min.css">
 
 </head>
 
@@ -41,17 +40,17 @@
                     <li><a href=""><i class="menu-icon fa fa-info"></i>Informations </a></li>
                     <li><a href=""><i class="menu-icon fa fa-file-alt"></i>Files </a></li>
                     <li class="menu-title">Accounting</li>
-                    <li class="menu-item-has-children dropdown active">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-stream"></i>Chart Of Account</a>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-stream"></i>Chart Of Account</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-th-large"></i><a href="/ela-admin/society/home-page/chart-of-account/general">General</a></li>
-                            <li><i class="fa fa-th"></i><a href="/ela-admin/society/home-page/chart-of-account/third-party">Third Party</a></li>
+                            <li><i class="menu-icon fa fa-th-large"></i><a href="/ela-admin/society/home-page/chart-of-account/general">General</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="/ela-admin/society/home-page/chart-of-account/third-party">Third Party</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-journal-whills"></i>Journal</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-quote-left"></i><a href="/ela-admin/society/home-page/journal/journal-code">Journal Code</a></li>
+                            <li><i class="menu-icon fa fa-quote-left"></i><a href="">Journal Code</a></li>
                             <li><i class="menu-icon fa fa-clipboard-list"></i><a href="/ela-admin/society/home-page/journal/transaction-record">Transaction Record</a></li>
                         </ul>
                     </li>
@@ -89,7 +88,7 @@
                 <div>
                     <div class="card">
                         <div class="card-body d-flex justify-content-between">
-                            <h4 class="box-title">General </h4>
+                            <h4 class="box-title">Journal code </h4>
                             <div>
                                 <button class="btn btn-success" data-toggle="modal" data-target="#insertModal"><i class="fa fa-plus"></i></button>
 
@@ -107,7 +106,7 @@
                                                             <h5 class="card-title">Import</h5>
                                                             <hr>
                                                             <p>Supported file : csv, xls, xlsx</p>
-                                                            <form action="/ela-admin/society/chart-of-account/import-general-account" method="POST" enctype="multipart/form-data">
+                                                            <form action="" method="POST" enctype="multipart/form-data">
                                                                 <input class="form-control form-control-sm" id="formFileSm" type="file" name="file">
                                                                 <div class="mt-3 d-flex justify-content-end">
                                                                     <button type="submit" class="btn btn-primary">Import</button>
@@ -125,9 +124,9 @@
                                                             <h4 class="card-title m-0 text-dark">Add manually</h4>
                                                             <hr>
                                                         </div>
-                                                        <form action="/ela-admin/society/chart-of-account/create-general-account" class="row g-3 px-3" method="POST">
+                                                        <form action="/ela-admin/society/journal/create-journal-code" class="row g-3 px-3" method="POST">
                                                             <div class="col-auto col-lg-12">
-                                                                <input type="number" class="form-control" placeholder="Account Number" name="accountNumber">
+                                                                <input type="text" class="form-control" placeholder="Code" name="code">
                                                             </div>
                                                             <div class="col-auto col-lg-12">
                                                                 <input type="text" class="form-control" placeholder="Entitled" name="entitled">
@@ -149,36 +148,36 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Account</th>
+                                        <th>Code</th>
                                         <th>Entitled</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for(int i = 0; i < generalAccounts.length; i++) { %>
+                                    <% for(int i = 0; i < journalCodes.length; i++) { %>
                                     <tr>
                                         <td><%= (i+1) %>.</td>
-                                        <td> <span class="count"><%= generalAccounts[i].getAccountNumber() %></span> </td>
-                                        <td><%= generalAccounts[i].getEntitled() %></td>
+                                        <td> <%= journalCodes[i].getCode() %> </td>
+                                        <td><%= journalCodes[i].getEntitled() %></td>
                                         <td class="d-flex justify-content-center">
                                             <div class="btn-group">
 
-                                                <button class="btn btn-warning" data-toggle="modal" data-target="#edit<%= generalAccounts[i].getAccountNumber() %>"><i class="fa fa-edit"></i></button>
+                                                <button class="btn btn-warning" data-toggle="modal" data-target="#edit<%= journalCodes[i].getCode() + i %>"><i class="fa fa-edit"></i></button>
                                                 <%-- Edit Modal --%>
-                                                <div class="modal fade" id="edit<%= generalAccounts[i].getAccountNumber() %>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="edit<%= journalCodes[i].getCode() + i %>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header d-flex justify-content-between">
-                                                                <h5 class="modal-title" id="mediumModalLabel">Update account</h5>
+                                                                <h5 class="modal-title" id="mediumModalLabel">Update journal code</h5>
                                                                 <button class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <form action="/ela-admin/society/chart-of-account/update-general-account" class="modal-body row g-3 px-3" method="POST">
-                                                                <input type="hidden" name="accountID" value="<%= generalAccounts[i].getAccountNumberID() %>" />
+                                                            <form action="/ela-admin/society/journal/update-journal-code" class="modal-body row g-3 px-3" method="POST">
+                                                                <input type="hidden" name="journalCodeID" value="<%= journalCodes[i].getJournalCodeID() %>" />
                                                                 <div class="col-auto col-lg-12">
-                                                                    <input type="number" class="form-control" placeholder="Account Number" name="accountNumber" value="<%= generalAccounts[i].getAccountNumber() %>">
+                                                                    <input type="text" class="form-control" placeholder="Code" name="code" value="<%= journalCodes[i].getCode() %>">
                                                                 </div>
                                                                 <div class="col-auto col-lg-12">
-                                                                    <input type="text" class="form-control" placeholder="Entitled" name="entitled" value="<%= generalAccounts[i].getEntitled() %>">
+                                                                    <input type="text" class="form-control" placeholder="Entitled" name="entitled" value="<%= journalCodes[i].getEntitled() %>">
                                                                 </div>
                                                                 <div class="col-auto ms-auto">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -190,12 +189,12 @@
                                                 </div>
                                                 <%-- /.Edit Modal --%>
 
-                                                <button class="btn btn-danger" data-toggle="modal" data-target="#suppress<%= generalAccounts[i].getAccountNumberID() %>"><i class="fa fa-times"></i></button>
+                                                <button class="btn btn-danger" data-toggle="modal" data-target="#suppress<%= journalCodes[i].getCode() + i %>"><i class="fa fa-times"></i></button>
                                                 <%-- Suppress Modal --%>
-                                                <div class="modal fade" id="suppress<%= generalAccounts[i].getAccountNumberID() %>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="suppress<%= journalCodes[i].getCode() + i %>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                                                        <form action="/ela-admin/society/chart-of-account/delete-general-account" class="modal-content" method="POST">
-                                                            <input type="hidden" name="accountID" value="<%= generalAccounts[i].getAccountNumberID() %>" />
+                                                        <form action="/ela-admin/society/journal/delete-journal-code" class="modal-content" method="POST">
+                                                            <input type="hidden" name="journalCodeID" value="<%= journalCodes[i].getJournalCodeID() %>" />
                                                             <div class="modal-header">
                                                                 <h3 class="modal-title text-danger text-center" id="mediumModalLabel">Are you sure to delete this ?</h3>
                                                             </div>
@@ -207,7 +206,6 @@
                                                     </div>
                                                 </div>
                                                 <%-- /.Suppress Modal --%>
-                                            
                                             </div>
                                         </td>
                                     </tr>
@@ -236,11 +234,9 @@
         <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
-    
+
     <!-- Scripts -->
     <script src="/static/assets/js/lib/jquery/jquery-3.6.4.min.js"></script>
-
-    
     <script src="/static/assets/css/lib/bootstrap/v4.1.3/js/bootstrap.min.js"></script>
     <script src="/static/assets/js/lib/jquery/jquery.matchHeight.js"></script>
     <script src="/static/assets/js/main.js"></script>
@@ -256,6 +252,6 @@
     <script src="/static/assets/js/lib/data-table/buttons.print.min.js"></script>
     <script src="/static/assets/js/lib/data-table/buttons.colVis.min.js"></script>
     <script src="/static/assets/js/init/datatables-init.js"></script>
-
+    
 </body>
 </html>

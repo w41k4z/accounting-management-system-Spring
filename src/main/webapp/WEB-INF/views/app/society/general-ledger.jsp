@@ -1,0 +1,170 @@
+<%@ page import="com.alain.accounting_management_system.model.Journal" %>
+<%
+    Journal[] general_ledger = (Journal[]) request.getAttribute("general_ledger");
+%>
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Transaction record</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/static/assets/fonts/fontawesome-5/css/all.min.css">
+    <link rel="stylesheet" href="/static/assets/css/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <link rel="stylesheet" href="/static/assets/css/lib/datatable/dataTables.bootstrap.min.css">
+
+</head>
+
+ <style>
+    .logout {
+        transition: all 0.5s ease;
+        font-size: larger;
+    }
+    .logout:hover {
+        cursor: pointer;
+        color: red;
+    }
+ </style>
+
+<body>
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/ela-admin/society/home-page/dashboard"><i class="menu-icon fa fa-laptop"></i>Dashboard </a></li>
+                    <li class="menu-title">About</li>
+                    <li><a href=""><i class="menu-icon fa fa-info"></i>Informations </a></li>
+                    <li><a href=""><i class="menu-icon fa fa-file-alt"></i>Files </a></li>
+                    <li class="menu-title">Accounting</li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-stream"></i>Chart Of Account</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-th-large"></i><a href="/ela-admin/society/home-page/chart-of-account/general">General</a></li>
+                            <li><i class="fa fa-th"></i><a href="/ela-admin/society/home-page/chart-of-account/third-party">Third Party</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-journal-whills"></i>Journal</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="menu-icon fa fa-quote-left"></i><a href="/ela-admin/society/home-page/journal/journal-code">Journal Code</a></li>
+                            <li><i class="menu-icon fa fa-clipboard-list"></i><a href="">Transaction Record</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"><a href=""><i class="menu-icon fa fa-book-open"></i>General Ledger </a></li>
+                    <li><a href=""><i class="menu-icon fa fa-balance-scale"></i>Financial Statement </a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+    <!-- /#left-panel -->
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+        <!-- Header-->
+        <header id="header" class="header">
+            <div class="top-left">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="./"><img src="/static/images/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="/static/images/logo2.png" alt="Logo"></a>
+                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+            <div class="top-right">
+                <div class="header-menu">
+                    <a href="/ela-admin/society/disconnect" class="logout dropdown float-right">
+                        ${account.getSocietyAccounts()[0].getSociety().getName()} <i class="fa fa-power-off"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <!-- /#header -->
+        <!-- Content -->
+        <div class="content">
+            <!-- Animated -->
+            <div class="animated fadeIn">
+                <div class="card">    
+                    <div class="card-body">
+                        <table id="bootstrap-data-table" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Journal Code</th>
+                                    <th>Date</th>
+                                    <th>Piece Number</th>
+                                    <th>Part Ref</th>
+                                    <th>Label</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(int i = 0; i < general_ledger.length; i++) { %>
+                                <tr>
+                                    <th><%= (i+1) %>.</th>
+                                    <td><%= general_ledger[i].getPartReference().substring(0, 2) %></td>
+                                    <td><%= general_ledger[i].getJournalDate() %></td>
+                                    <td><%= general_ledger[i].getPieceNumber() %></td>
+                                    <td><%= general_ledger[i].getPartReference() %></td>
+                                    <td><%= general_ledger[i].getLabel() %></td>
+                                    <td><%= general_ledger[i].getDebit() %></td>
+                                    <td><%= general_ledger[i].getCredit() %></td>
+                                    <td>
+                                        <form action="/ela-admin/society/home-page/general-ledger/details" method="POST">
+                                            <input type="hidden" name="date" value="<%= general_ledger[i].getJournalDate() %>">
+                                            <input type="hidden" name="partRef" value="<%= general_ledger[i].getPartReference() %>">
+                                            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.div -->
+            </div>
+            <!-- .animated -->
+        </div>
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-inner bg-white">
+                <div class="row">
+                    <div class="col-sm-6">
+                        Copyright &copy; 2023 Society fundation
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- /.site-footer -->
+    </div>
+    <!-- /#right-panel -->
+    
+    <!-- Scripts -->
+    <script src="/static/assets/js/lib/jquery/jquery-3.6.4.min.js"></script>
+
+    
+    <script src="/static/assets/css/lib/bootstrap/v4.1.3/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/lib/jquery/jquery.matchHeight.js"></script>
+    <script src="/static/assets/js/main.js"></script>
+
+    <%-- Data Table --%>
+    <script src="/static/assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/jszip.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="/static/assets/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="/static/assets/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="/static/assets/js/init/datatables-init.js"></script>
+
+</body>
+</html>

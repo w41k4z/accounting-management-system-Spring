@@ -12,7 +12,7 @@ import fileActivity.Executor;
 public class CsvReader {
 
     private File csvFile;
-    private String separator = ",";
+    private String separator = ";";
 
     // constructor
     public CsvReader(File file, String separator) throws Exception {
@@ -46,6 +46,9 @@ public class CsvReader {
         List<List<String>> content = new ArrayList<>();
         List<String> result = Files.readAllLines(this.getCsvFile().toPath());
         for (String line : result) {
+            if (line.endsWith(this.getSeparator())) {
+                line += " ";
+            }
             content.add(Arrays.asList(line.split(this.getSeparator())));
         }
         this.getCsvFile().delete();

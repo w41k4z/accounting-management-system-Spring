@@ -45,11 +45,11 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-journal-whills"></i>Journal</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-quote-left"></i><a href="">Journal Code</a></li>
-                            <li><i class="menu-icon fa fa-clipboard-list"></i><a href="">Transaction Record</a></li>
+                            <li><i class="menu-icon fa fa-quote-left"></i><a href="/ela-admin/society/home-page/journal/journal-code">Journal Code</a></li>
+                            <li><i class="menu-icon fa fa-clipboard-list"></i><a href="/ela-admin/society/home-page/journal/transaction-record">Transaction Record</a></li>
                         </ul>
                     </li>
-                    <li><a href=""><i class="menu-icon fa fa-book-open"></i>General Ledger </a></li>
+                    <li><a href="/ela-admin/society/home-page/general-ledger"><i class="menu-icon fa fa-book-open"></i>General Ledger </a></li>
                     <li><a href=""><i class="menu-icon fa fa-balance-scale"></i>Financial Statement </a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->

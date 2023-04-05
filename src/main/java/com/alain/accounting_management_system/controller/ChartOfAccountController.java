@@ -83,9 +83,8 @@ public class ChartOfAccountController {
         if (session.getAttribute("account") == null) {
             return "redirect:/ela-admin";
         }
-        ChartOfAccount toUpdate;
         try {
-            toUpdate = new ChartOfAccount();
+            ChartOfAccount toUpdate = new ChartOfAccount();
             toUpdate.setAccountNumberID(accountID);
             toUpdate.setAccountNumber(accountNumber);
             toUpdate.setEntitled(entitled);
@@ -113,21 +112,76 @@ public class ChartOfAccountController {
     }
 
     // third party account
-    @PostMapping("/new-third-party-account")
-    public String addNewThirdPartyChartOfAccount(@RequestParam String accountNumber, @RequestParam String type,
-            @RequestParam String name,
-            @RequestParam String entitled,
+    @PostMapping("/import-third-party-account")
+    public String importThirdPartyChartOfAccount(@RequestParam MultipartFile file, HttpSession session) {
+        if (session.getAttribute("account") == null) {
+            return "redirect:/ela-admin";
+        }
+        try {
+            DatabaseConnection connection = new AppDBCon().defaultConnection();
+            Account account = (Account) session.getAttribute("account");
+            File uploadedFile = convertMultipartFileToFile(file);
+            CsvConverter csvConverter = new CsvConverter(uploadedFile);
+            CsvReader csvReader = new CsvReader(csvConverter.convertToCsv(), ";;");
+            ThirdPartyChartOfAccount.insertImportedData(connection, csvReader.getContent(),
+                    account.getSocietyAccounts()[0].getSocietyID());
+            connection.commit();
+            connection.close();
+        } catch (Exception e) {
+            return "redirect:/ela-admin/error?error=" + e.getMessage();
+        }
+        return "redirect:/ela-admin/society/home-page/chart-of-account/third-party";
+    }
+
+    @PostMapping("/create-third-party-account")
+    public String createThirdPartyChartOfAccount(@RequestParam String type, @RequestParam String entitled,
             HttpSession session) {
         if (session.getAttribute("account") == null) {
             return "redirect:/ela-admin";
         }
         try {
+            Account account = (Account) session.getAttribute("account");
+            Society currentSociety = account.getSocietyAccounts()[0].getSociety();
             ThirdPartyChartOfAccount newThirdPartyChartOfAccount = new ThirdPartyChartOfAccount();
-            newThirdPartyChartOfAccount.setChartOfAccountID(accountNumber);
+            newThirdPartyChartOfAccount.setSocietyID(currentSociety.getSocietyID());
             newThirdPartyChartOfAccount.setKey(type);
-            newThirdPartyChartOfAccount.setValue(name);
+            newThirdPartyChartOfAccount.setValue(entitled);
 
             newThirdPartyChartOfAccount.create(new AppDBCon());
+        } catch (Exception e) {
+            return "redirect:/ela-admin/error?error=" + e.getMessage();
+        }
+        return "redirect:/ela-admin/society/home-page/chart-of-account/third-party";
+    }
+
+    @PostMapping("/update-third-party-account")
+    public String updateThirdPartyChartOfAccount(@RequestParam String accountID, @RequestParam String key,
+            @RequestParam String value, HttpSession session) {
+        if (session.getAttribute("account") == null) {
+            return "redirect:/ela-admin";
+        }
+        try {
+            ThirdPartyChartOfAccount toUpdate = new ThirdPartyChartOfAccount();
+            toUpdate.setThirdPartyChartOfAccountID(accountID);
+            toUpdate.setKey(key);
+            toUpdate.setValue(value);
+
+            toUpdate.update(new AppDBCon());
+        } catch (Exception e) {
+            return "redirect:/ela-admin/error?error=" + e.getMessage();
+        }
+        return "redirect:/ela-admin/society/home-page/chart-of-account/third-party";
+    }
+
+    @PostMapping("/delete-third-party-account")
+    public String deleteThirdPartyChartOfAccount(@RequestParam String accountID, HttpSession session) {
+        if (session.getAttribute("account") == null) {
+            return "redirect:/ela-admin";
+        }
+        try {
+            ThirdPartyChartOfAccount toDelete = new ThirdPartyChartOfAccount();
+            toDelete.setThirdPartyChartOfAccountID(accountID);
+            toDelete.delete(new AppDBCon());
         } catch (Exception e) {
             return "redirect:/ela-admin/error?error=" + e.getMessage();
         }

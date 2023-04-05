@@ -7,7 +7,10 @@ CREATE SEQUENCE soc_equi_curr_seq;
 CREATE SEQUENCE equi_curr_det_seq;
 CREATE SEQUENCE society_account_seq;
 CREATE SEQUENCE chart_of_account_seq;
+CREATE SEQUENCE third_party_account_type_seq;
 CREATE SEQUENCE third_party_chart_of_account_seq;
+CREATE SEQUENCE journal_code_seq;
+CREATE SEQUENCE journal_seq;
 
 CREATE TABLE currency (
     id VARCHAR(5) PRIMARY KEY,
@@ -59,7 +62,28 @@ ALTER TABLE chart_of_account
   ADD CONSTRAINT uq_chart_of_account UNIQUE(account_number, society_id);
 CREATE TABLE third_party_chart_of_account (
     thd_pt_chrt_acc_id VARCHAR(8) PRIMARY KEY,
-    chrt_acc_id VARCHAR(8) REFERENCES chart_of_account(id),
     key VARCHAR(5) NOT NULL, -- is unique for each society
+    society_id VARCHAR(8) REFERENCES society(id),
     value VARCHAR(25) NOT NUll
-); 
+);
+ALTER TABLE third_party_chart_of_account
+  ADD CONSTRAINT uq_third_party_chart_of_account UNIQUE(key, value);
+
+CREATE TABLE journal_code (
+    id VARCHAR(6) PRIMARY KEY,
+    code VARCHAR(2) NOT NULL,
+    entitled VARCHAR(25) NOT NULL
+);
+CREATE TABLE journal (
+    id VARCHAR(8) PRIMARY KEY,
+    society_id VARCHAR(8) REFERENCES society(id),
+    journal_date DATE NOT NULL,
+    piece_number INT,
+    part_reference VARCHAR(25) NOT NULL,
+    general_account VARCHAR(8) NOT NULL, -- hard to reference 'cause each society has its own chart of account
+    third_party_account VARCHAR(8), -- can be null so not possible to reference
+    entitled VARCHAR(50) NOT NULL,
+    label TEXT,
+    debit REAL,
+    credit REAL
+);

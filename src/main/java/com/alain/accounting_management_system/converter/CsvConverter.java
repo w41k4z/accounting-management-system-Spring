@@ -19,7 +19,7 @@ import fileActivity.Executor;
 
 public class CsvConverter {
 
-    private final List<String> validExtension = Arrays.asList(new String[] { "csv", "xls", "ods" });
+    private final List<String> validExtension = Arrays.asList(new String[] { "csv", "xls", "xlsx" });
     private File fileToConvert;
 
     // constructor
@@ -44,6 +44,9 @@ public class CsvConverter {
     // method
     public File convertToCsv() throws Exception {
         if (Executor.getFileExtension(this.getFileToConvert()).toLowerCase().equals("csv")) {
+            if (!this.getFileToConvert().exists()) {
+                this.getFileToConvert().createNewFile();
+            }
             return this.getFileToConvert();
         }
         File convertedFile = new File("CsvFile.csv");
@@ -75,7 +78,7 @@ public class CsvConverter {
             for (int i = 0; i < row.length; i++) {
                 writer.write(row[i]);
                 if (i < row.length - 1) {
-                    writer.write(";;");
+                    writer.write(";");
                 }
             }
             writer.write("\n");

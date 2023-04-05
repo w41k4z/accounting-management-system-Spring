@@ -38,3 +38,13 @@ insert into society_account values
 
 
 -- chart of account already imported --
+
+insert into journal_code values 
+('JCD001', 'AC', 'Achats'),
+('JCD002', 'AN', 'A nouveau'),
+('JCD003', 'BN', 'Banque BNI'),
+('JCD004', 'BO', 'Banque BOA'),
+('JCD005', 'CA', 'Caisse'),
+('JCD006', 'OD', 'Opeations diverses'),
+('JCD007', 'VL', 'Ventes locales'),
+('JCD008', 'VE', 'Ventes a l exportation');

@@ -27,8 +27,6 @@ public class ChartOfAccount extends Relation<ChartOfAccount> {
     @Column
     private String entitled;
 
-    private ThirdPartyChartOfAccount[] thirdPartyChartOfAccounts;
-
     // constructor
     public ChartOfAccount() throws Exception {
         super();
@@ -56,10 +54,6 @@ public class ChartOfAccount extends Relation<ChartOfAccount> {
         this.entitled = entitled.trim();
     }
 
-    private void setThirdPartyChartOfAccounts(ThirdPartyChartOfAccount[] thirdPartyChartOfAccounts) {
-        this.thirdPartyChartOfAccounts = thirdPartyChartOfAccounts;
-    }
-
     // getters
     public String getAccountNumberID() {
         return this.accountNumberID;
@@ -77,49 +71,7 @@ public class ChartOfAccount extends Relation<ChartOfAccount> {
         return this.entitled;
     }
 
-    public ThirdPartyChartOfAccount[] getThirdPartyChartOfAccounts() {
-        return this.thirdPartyChartOfAccounts;
-    }
-
     // methods
-    private void getThirdPartyChartOfAccounts(DatabaseConnection connection) throws Exception {
-        ThirdPartyChartOfAccount[] thirdPartyChartOfAccounts = new ThirdPartyChartOfAccount().findAll(connection,
-                "WHERE chrt_acc_id = '" + this.getAccountNumberID() + "'");
-        this.setThirdPartyChartOfAccounts(thirdPartyChartOfAccounts);
-    }
-
-    @Override
-    public ChartOfAccount[] findAll(DatabaseConnection connection) throws Exception {
-        ChartOfAccount[] chartOfAccounts = super.findAll(connection);
-        for (ChartOfAccount chartOfAccount : chartOfAccounts) {
-            chartOfAccount.getThirdPartyChartOfAccounts(connection);
-        }
-        return chartOfAccounts;
-    }
-
-    @Override
-    public ChartOfAccount[] findAll(DatabaseConnection connection, String spec) throws Exception {
-        ChartOfAccount[] chartOfAccounts = super.findAll(connection, spec);
-        for (ChartOfAccount chartOfAccount : chartOfAccounts) {
-            chartOfAccount.getThirdPartyChartOfAccounts(connection);
-        }
-        return chartOfAccounts;
-    }
-
-    @Override
-    public ChartOfAccount findByPrimaryKey(DatabaseConnection connection) throws Exception {
-        ChartOfAccount chartOfAccount = super.findByPrimaryKey(connection);
-        chartOfAccount.getThirdPartyChartOfAccounts(connection);
-        return chartOfAccount;
-    }
-
-    @Override
-    public ChartOfAccount findByPrimaryKey(DatabaseConnection connection, String pk) throws Exception {
-        ChartOfAccount chartOfAccount = super.findByPrimaryKey(connection, pk);
-        chartOfAccount.getThirdPartyChartOfAccounts(connection);
-        return chartOfAccount;
-    }
-
     public String accountNumberRectification(String accountNumber) throws Exception {
         StringBuilder validAccountNumber = new StringBuilder(accountNumber);
         for (int i = 0; i < ACCOUNT_NUMBER_LENGTH - accountNumber.length(); i++) {
