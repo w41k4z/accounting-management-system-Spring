@@ -35,16 +35,3 @@ insert into equivalent_currency_detail values
 
 insert into society_account values
 ('SAC00001', 'ACC0001', 'SOC0001', 'society');
-
-
--- chart of account already imported --
-
-insert into journal_code values 
-('JCD001', 'AC', 'Achats'),
-('JCD002', 'AN', 'A nouveau'),
-('JCD003', 'BN', 'Banque BNI'),
-('JCD004', 'BO', 'Banque BOA'),
-('JCD005', 'CA', 'Caisse'),
-('JCD006', 'OD', 'Opeations diverses'),
-('JCD007', 'VL', 'Ventes locales'),
-('JCD008', 'VE', 'Ventes a l exportation');
