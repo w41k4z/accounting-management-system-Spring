@@ -49,7 +49,7 @@ public class JournalController {
         } catch (Exception e) {
             return "redirect:/ela-admin/error?error=" + e.getMessage();
         }
-        return "redirect:/ela-admin/society/home-page/journal/transaction-recorder";
+        return "redirect:/ela-admin/society/home-page/journal/transaction-record";
     }
 
     // journal code

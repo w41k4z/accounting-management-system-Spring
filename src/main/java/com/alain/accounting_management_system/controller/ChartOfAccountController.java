@@ -44,7 +44,7 @@ public class ChartOfAccountController {
             Account account = (Account) session.getAttribute("account");
             File uploadedFile = convertMultipartFileToFile(file);
             CsvConverter csvConverter = new CsvConverter(uploadedFile);
-            CsvReader csvReader = new CsvReader(csvConverter.convertToCsv(), ";;");
+            CsvReader csvReader = new CsvReader(csvConverter.convertToCsv(), ";");
             ChartOfAccount.insertImportedData(connection, csvReader.getContent(),
                     account.getSocietyAccounts()[0].getSocietyID());
             connection.commit();
