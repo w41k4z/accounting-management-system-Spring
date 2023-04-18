@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.alain.accounting_management_system.connection.AppDBCon;
-import com.alain.accounting_management_system.model.Account;
+import com.alain.accounting_management_system.model.UserAccount;
 import com.alain.accounting_management_system.utils.MoneyFormatter;
 
 import orm.database.connection.DatabaseConnection;

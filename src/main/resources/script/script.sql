@@ -16,15 +16,20 @@ CREATE TABLE currency (
     id VARCHAR(5) PRIMARY KEY,
     label VARCHAR(3) NOT NULL UNIQUE
 );
-CREATE TABLE account (
+CREATE TABLE user_account (
     id VARCHAR(7) PRIMARY KEY,
+    name VARCHAR(25) NOT NULL,
+    first_name VARCHAR(25),
+    birthdate DATE NOT NULL,
     email VARCHAR(25) NOT NULL UNIQUE,
+    phone_number VARCHAR(14),
+    address TEXT,
     password VARCHAR(16) NOT NULL
 );
 CREATE TABLE society (
     id VARCHAR(8) PRIMARY KEY,
     name VARCHAR(25) NOT NULL,
-    ceo VARCHAR(40) NOT NULL,
+    logo VARCHAR(50) NOT NULL,
     object TEXT NOT NULL,
     address TEXT NOT NULL,
     headquarters VARCHAR(25) NOT NULL,
@@ -48,7 +53,7 @@ CREATE TABLE equivalent_currency_detail (
 );
 CREATE TABLE society_account (
     id VARCHAR(8) PRIMARY KEY,
-    account_id VARCHAR(7) REFERENCES account(id),
+    account_id VARCHAR(7) REFERENCES user_account(id),
     society_id VARCHAR(8) REFERENCES society(id),
     password VARCHAR(16) NOT NULL
 );

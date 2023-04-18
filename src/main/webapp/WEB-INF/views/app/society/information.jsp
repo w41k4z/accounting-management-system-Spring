@@ -95,79 +95,110 @@
                         <div class="row g-5">
                             <div class="col-md-5 col-lg-4 order-md-last">
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-primary">Your cart</span>
-                                    <span class="badge bg-primary rounded-pill">3</span>
+                                    <span class="text-primary">CEO</span>
                                 </h4>
                                 <ul class="list-group mb-3">
-                                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <li class="list-group-item">
                                         <div>
-                                            <h6 class="my-0">Product name</h6>
-                                            <small class="text-muted">Brief description</small>
+                                            <h6 class="my-0">Name</h6>
+                                            <small class="text-muted text-end">${account.getName()}</small>
                                         </div>
-                                        <span class="text-muted">$12</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <li class="list-group-item">
                                         <div>
-                                            <h6 class="my-0">Second product</h6>
-                                            <small class="text-muted">Brief description</small>
+                                            <h6 class="my-0">First Name</h6>
+                                            <small class="text-muted text-end">${account.getFirstName()}</small>
                                         </div>
-                                        <span class="text-muted">$8</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <li class="list-group-item">
                                         <div>
-                                            <h6 class="my-0">Third item</h6>
-                                            <small class="text-muted">Brief description</small>
+                                            <h6 class="my-0">BirthDay</h6>
+                                            <small class="text-muted text-end">${account.getBirthDate()}</small>
                                         </div>
-                                        <span class="text-muted">$5</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between bg-light">
-                                        <div class="text-success">
-                                            <h6 class="my-0">Promo code</h6>
-                                            <small>EXAMPLECODE</small>
+                                    <li class="list-group-item">
+                                        <div>
+                                            <h6 class="my-0">Address</h6>
+                                            <small class="text-muted text-end">${account.getAddress()}</small>
                                         </div>
-                                        <span class="text-success">−$5</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <span>Total (USD)</span>
-                                        <strong>$20</strong>
+                                    <li class="list-group-item">
+                                        <div>
+                                            <h6 class="my-0">Phone Number</h6>
+                                            <small class="text-muted text-end">${account.getPhoneNumber()}</small>
+                                        </div>
                                     </li>
                                 </ul>
-
-                                <form class="card p-2">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Promo code">
-                                        <button type="submit" class="btn btn-secondary">Redeem</button>
-                                    </div>
-                                </form>
                             </div>
                             <div class="col-md-7 col-lg-8">
                                 <form class="needs-validation" novalidate>
                                     <div class="row g-3">
                                         <div class="col-sm-6">
-                                            <label for="firstName" class="form-label">First name</label>
-                                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                            <label for="companyName" class="form-label">Company name</label>
+                                            <input type="text" class="form-control" id="companyName" value="${society.getName()}" required>
                                             <div class="invalid-feedback">
-                                                Valid first name is required.
+                                                Valid company name is required.
                                             </div>
                                         </div>
 
                                         <div class="col-sm-6">
-                                            <label for="lastName" class="form-label">Last name</label>
-                                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                            <label for="address" class="form-label">Address</label>
+                                            <input type="text" class="form-control" id="address" value="${society.getAddress()}" required>
                                             <div class="invalid-feedback">
-                                                Valid last name is required.
+                                                Valid address is required.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label for="creationDate" class="form-label">Creation date</label>
+                                            <input type="date" class="form-control" id="creationDate" value="${society.getCreationDate()}" required>
+                                            <div class="invalid-feedback">
+                                                Valid date is required.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label for="creationDate" class="form-label">Start date of accounting period</label>
+                                            <input type="date" class="form-control" id="creationDate" value="${society.getStartDateOfAccountingPeriod()}" required>
+                                            <div class="invalid-feedback">
+                                                Valid date is required.
                                             </div>
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="username" class="form-label">Username</label>
-                                            <div class="input-group has-validation">
-                                                <span class="input-group-text">@</span>
-                                                <input type="text" class="form-control" id="username" placeholder="Username" required>
-                                                <div class="invalid-feedback">
-                                                    Your username is required.
-                                                </div>
+                                            <label for="object" class="form-label">Object</label>
+                                            <textarea class="form-control" id="object" required >${society.getObject()}</textarea>
+                                            <div class="invalid-feedback">
+                                                Valid object is required.
                                             </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label for="headquarters" class="form-label">Headquarters</label>
+                                            <input type="text" class="form-control" id="headquarters" value="${society.getHeadquarters()}" required>
+                                            <div class="invalid-feedback">
+                                                Valid headquarters is required.
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label for="tin" class="form-label">Tax identification number</label>
+                                            <input type="text" class="form-control" id="tin" value="${society.getTaxIdentificationNumber()}">
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label for="stn" class="form-label">Statistical number</label>
+                                            <input type="text" class="form-control" id="stn" value="${society.getStatisticalNumber()}">
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label for="crgn" class="form-label">Commercial register number</label>
+                                            <input type="text" class="form-control" id="crgn" value="${society.getCommercialRegisterNumber()}">
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label for="status" class="form-label">Status</label>
+                                            <input type="text" class="form-control" id="status" value="${society.getStatus()}">
                                         </div>
 
                                         <div class="col-12">
@@ -176,19 +207,6 @@
                                             <div class="invalid-feedback">
                                                 Please enter a valid email address for shipping updates.
                                             </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="address" class="form-label">Address</label>
-                                            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-                                            <div class="invalid-feedback">
-                                                Please enter your shipping address.
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                                            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
                                         </div>
 
                                         <div class="col-md-5">
@@ -220,6 +238,9 @@
                                                 Zip code required.
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-footer d-flex justify-content-end mt-3">
+                                        <button class="btn btn-primary" type="submit">Save</button>
                                     </div>
                                 </form>
                             </div>

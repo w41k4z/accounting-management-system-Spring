@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alain.accounting_management_system.model.Account;
+import com.alain.accounting_management_system.model.UserAccount;
 
 import jakarta.servlet.http.HttpSession;
 import orm.database.connection.DatabaseConnection;
@@ -30,9 +30,10 @@ public class AccountController {
         DatabaseConnection connection = new AppDBCon();
         String result = "";
         try {
-            Account account = Account.authenticate(connection, email, password);
+            UserAccount account = UserAccount.authenticate(connection, email, password);
             if (account != null) {
                 session.setAttribute("account", account);
+                session.setAttribute("society", account.getSocietyAccounts()[0].getSociety());
                 result = "redirect:/ela-admin/society/home-page/dashboard";
             } else {
                 result = this.login("Authentication failed. Please verify your informations !", model);
@@ -49,7 +50,7 @@ public class AccountController {
         DatabaseConnection connection = new AppDBCon();
         String result = "";
         try {
-            Account[] accounts = new Account().findAll(connection, "WHERE email = '" + email + "'");
+            UserAccount[] accounts = new UserAccount().findAll(connection, "WHERE email = '" + email + "'");
             result = accounts.length > 0 ? "found" : null;
         } catch (Exception e) {
             result = e.getMessage();

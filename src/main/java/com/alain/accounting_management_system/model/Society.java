@@ -17,8 +17,8 @@ public class Society extends Relation<Society> {
     @Column
     private String name;
 
-    @Column(name = "ceo")
-    private String societyCEO;
+    @Column
+    private String logo;
 
     @Column
     private String object;
@@ -68,8 +68,8 @@ public class Society extends Relation<Society> {
         this.name = name;
     }
 
-    public void setSocietyCEO(String societyCEO) {
-        this.societyCEO = societyCEO;
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public void setObject(String object) {
@@ -129,8 +129,8 @@ public class Society extends Relation<Society> {
         return this.name;
     }
 
-    public String getSocietyCEO() {
-        return this.societyCEO;
+    public String getLogo() {
+        return this.logo;
     }
 
     public String getObject() {

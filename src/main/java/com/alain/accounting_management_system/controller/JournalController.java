@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alain.accounting_management_system.connection.AppDBCon;
 import com.alain.accounting_management_system.utils.converter.CsvConverter;
-import com.alain.accounting_management_system.model.Account;
+import com.alain.accounting_management_system.model.UserAccount;
 import com.alain.accounting_management_system.model.Journal;
 import com.alain.accounting_management_system.model.JournalCode;
 import com.alain.accounting_management_system.utils.reader.CsvReader;
@@ -38,7 +38,7 @@ public class JournalController {
         }
         try {
             DatabaseConnection connection = new AppDBCon().defaultConnection();
-            Account account = (Account) session.getAttribute("account");
+            UserAccount account = (UserAccount) session.getAttribute("account");
             File uploadedFile = convertMultipartFileToFile(file);
             CsvConverter csvConverter = new CsvConverter(uploadedFile);
             CsvReader csvReader = new CsvReader(csvConverter.convertToCsv(), ";");

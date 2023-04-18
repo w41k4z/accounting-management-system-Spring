@@ -12,7 +12,7 @@ public class MainController {
 
     @GetMapping("")
     public String index() {
-        return "redirect:/ela-admin/account/login";
+        return "/app/user-space";
     }
 
     @GetMapping("/error")

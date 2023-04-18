@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alain.accounting_management_system.connection.AppDBCon;
-import com.alain.accounting_management_system.model.Account;
+import com.alain.accounting_management_system.model.UserAccount;
 import com.alain.accounting_management_system.model.ChartOfAccount;
 import com.alain.accounting_management_system.model.Journal;
 import com.alain.accounting_management_system.model.JournalCode;
+import com.alain.accounting_management_system.model.Society;
 import com.alain.accounting_management_system.model.ThirdPartyChartOfAccount;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,8 +25,10 @@ public class SocietyController {
     @GetMapping("/home-page/{page}")
     public String home(@PathVariable String page, HttpSession session, Model model) {
         try {
-            Account account = (Account) session.getAttribute("account");
+            UserAccount account = (UserAccount) session.getAttribute("account");
+            Society society = (Society) session.getAttribute("society");
             model.addAttribute("account", account);
+            model.addAttribute("society", society);
             model.addAttribute("general_ledger",
                     Journal.getGeneralLedger(new AppDBCon(), account.getSocietyAccounts()[0].getSocietyID()));
             return account != null ? "/app/society/" + page : "redirect:/ela-admin";
@@ -37,7 +40,7 @@ public class SocietyController {
     @GetMapping("/home-page/chart-of-account/{type}")
     public String chartOfAccount(@PathVariable String type, HttpSession session, Model model) {
         try {
-            Account account = (Account) session.getAttribute("account");
+            UserAccount account = (UserAccount) session.getAttribute("account");
             model.addAttribute("generalAccount", new ChartOfAccount().findAll(new AppDBCon(),
                     "WHERE society_id = '" + account.getSocietyAccounts()[0].getSocietyID() + "' ORDER BY id"));
             model.addAttribute("thirdPartyAccount", new ThirdPartyChartOfAccount().findAll(new AppDBCon(),
@@ -57,7 +60,7 @@ public class SocietyController {
         try {
             String month = date == null ? "(SELECT EXTRACT(MONTH FROM CURRENT_DATE))" : date.split("-")[1];
             String year = date == null ? "(SELECT EXTRACT(YEAR FROM CURRENT_DATE))" : date.split("-")[0];
-            Account account = (Account) session.getAttribute("account");
+            UserAccount account = (UserAccount) session.getAttribute("account");
             model.addAttribute("journalCodes", new JournalCode().findAll(new AppDBCon()));
             model.addAttribute("journals", new Journal().findAll(new AppDBCon(),
                     "WHERE EXTRACT(MONTH FROM journal_date) = " + month + " AND EXTRACT(YEAR FROM journal_date) = "
@@ -74,7 +77,7 @@ public class SocietyController {
         if (session.getAttribute("account") == null) {
             return "redirect:/ela-admin";
         }
-        Account account = (Account) session.getAttribute("account");
+        UserAccount account = (UserAccount) session.getAttribute("account");
         try {
             model.addAttribute("journals", new Journal().findAll(new AppDBCon(), "WHERE society_id = '"
                     + account.getSocietyAccounts()[0].getSocietyID() + "' AND part_reference = '"

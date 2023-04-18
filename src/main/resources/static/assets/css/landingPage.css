@@ -1,0 +1,9 @@
+body {
+    background: linear-gradient(to bottom,#3D5F87, #6396C0);
+}
+.jumbotron {
+    background: url(/static/images/background.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 83vh;
+}

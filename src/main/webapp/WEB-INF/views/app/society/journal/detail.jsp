@@ -1,4 +1,5 @@
 <%@ page import="com.alain.accounting_management_system.model.Journal" %>
+<%@ page import="com.alain.accounting_management_system.utils.MoneyFormatter" %>
 <%
     Journal[] journals = (Journal[]) request.getAttribute("journals");
 %>
@@ -110,8 +111,8 @@
                                     <td><%= journals[i].getPartReference() %></td>
                                     <td><%= journals[i].getGeneralAccount() %></td>
                                     <td><%= journals[i].getThirdPartyAccount() %></td>
-                                    <td><%= journals[i].getDebit() %></td>
-                                    <td><%= journals[i].getCredit() %></td>
+                                    <td class="text-end"><%= MoneyFormatter.display(journals[i].getDebit()) %></td>
+                                    <td class="text-end"><%= MoneyFormatter.display(journals[i].getCredit()) %></td>
                                 </tr>
                                 <% } %>
                             </tbody>

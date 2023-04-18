@@ -1,4 +1,5 @@
 <%@ page import="com.alain.accounting_management_system.model.Journal" %>
+<%@ page import="com.alain.accounting_management_system.utils.MoneyFormatter" %>
 <%
     Journal[] general_ledger = (Journal[]) request.getAttribute("general_ledger");
 %>
@@ -92,10 +93,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Journal Code</th>
+                                    <th>JC</th>
                                     <th>Date</th>
-                                    <th>Piece Number</th>
-                                    <th>Part Ref</th>
                                     <th>Label</th>
                                     <th>Debit</th>
                                     <th>Credit</th>
@@ -108,13 +107,11 @@
                                     <th><%= (i+1) %>.</th>
                                     <td><%= general_ledger[i].getPartReference().substring(0, 2) %></td>
                                     <td><%= general_ledger[i].getJournalDate() %></td>
-                                    <td><%= general_ledger[i].getPieceNumber() %></td>
-                                    <td><%= general_ledger[i].getPartReference() %></td>
                                     <td><%= general_ledger[i].getLabel() %></td>
-                                    <td><%= general_ledger[i].getDebit() %></td>
-                                    <td><%= general_ledger[i].getCredit() %></td>
+                                    <td class="text-end"><%= MoneyFormatter.display(general_ledger[i].getDebit()) %></td>
+                                    <td class="text-end"><%= MoneyFormatter.display(general_ledger[i].getCredit()) %></td>
                                     <td>
-                                        <form action="/ela-admin/society/home-page/general-ledger/details" method="POST">
+                                        <form action="/ela-admin/society/home-page/general-ledger/details" class="d-flex justify-content-center" method="POST">
                                             <input type="hidden" name="date" value="<%= general_ledger[i].getJournalDate() %>">
                                             <input type="hidden" name="partRef" value="<%= general_ledger[i].getPartReference() %>">
                                             <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button>
