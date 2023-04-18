@@ -4,7 +4,6 @@ import orm.annotation.Table;
 import orm.annotation.PrimaryKey;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.List;
 
 import orm.annotation.Column;

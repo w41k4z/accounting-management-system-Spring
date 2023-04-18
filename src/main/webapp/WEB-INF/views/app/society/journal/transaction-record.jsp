@@ -1,4 +1,5 @@
 <%@ page import="com.alain.accounting_management_system.model.Journal" %>
+<%@ page import="com.alain.accounting_management_system.utils.MoneyFormatter" %>
 <%
     Journal[] journals = (Journal[]) request.getAttribute("journals");
 %>
@@ -38,7 +39,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/ela-admin/society/home-page/dashboard"><i class="menu-icon fa fa-laptop"></i>Dashboard </a></li>
                     <li class="menu-title">About</li>
-                    <li><a href=""><i class="menu-icon fa fa-info"></i>Informations </a></li>
+                    <li><a href="/ela-admin/society/home-page/information"><i class="menu-icon fa fa-info"></i>Informations </a></li>
                     <li><a href=""><i class="menu-icon fa fa-file-alt"></i>Files </a></li>
                     <li class="menu-title">Accounting</li>
                     <li class="menu-item-has-children dropdown">
@@ -139,8 +140,8 @@
                                     <td><%= journals[i].getPartReference() %></td>
                                     <td><%= journals[i].getGeneralAccount() %></td>
                                     <td><%= journals[i].getThirdPartyAccount() %></td>
-                                    <td><%= journals[i].getDebit() %></td>
-                                    <td><%= journals[i].getCredit() %></td>
+                                    <td class="text-end"><%= MoneyFormatter.display(journals[i].getDebit()) %></td>
+                                    <td class="text-end"><%= MoneyFormatter.display(journals[i].getCredit()) %></td>
                                 </tr>
                                 <% } %>
                             </tbody>

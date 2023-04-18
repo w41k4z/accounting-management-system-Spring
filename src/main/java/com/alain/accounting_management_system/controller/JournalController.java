@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alain.accounting_management_system.connection.AppDBCon;
-import com.alain.accounting_management_system.converter.CsvConverter;
+import com.alain.accounting_management_system.utils.converter.CsvConverter;
 import com.alain.accounting_management_system.model.Account;
 import com.alain.accounting_management_system.model.Journal;
 import com.alain.accounting_management_system.model.JournalCode;
-import com.alain.accounting_management_system.reader.CsvReader;
+import com.alain.accounting_management_system.utils.reader.CsvReader;
 
 import jakarta.servlet.http.HttpSession;
 import orm.database.connection.DatabaseConnection;
